@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Hint from './Hint';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import firebase from './firebase.js';
-const myArray = [
-  { title: 'Arie Belenky', subtitle: 'Software Developer' },
-  { title: 'Zigi Bigule', subtitle: 'Software Engineer' }
-];
+import Feed from './components/feed/Feed';
 
-// will currently act as feed
 class App extends Component {
   constructor() {
     super();
@@ -38,20 +30,7 @@ class App extends Component {
     });
   }
   render() {
-    return (
-      <MuiThemeProvider>
-        <div className="App">
-          <ul>
-            {this.state.myHints.map((item, index) => (
-              <li>
-                {' '}
-                <Hint {...item} />
-              </li>
-            ))}
-          </ul>
-        </div>
-      </MuiThemeProvider>
-    );
+    return <Feed />;
   }
   handleSubmit(e) {
     e.preventDefault();
