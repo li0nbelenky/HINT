@@ -20,15 +20,35 @@ process.on('uncaughtException', function(err) {
   console.log('uncaughtException', err);
 });
 
+const mockDB = [
+    {
+        payload: [{title: 'Arie Belenky', subtitle: 'Software Developer'},
+        {title: 'Bigi Zigule', subtitle: 'Software Engineer'}],
+      },
+      {
+        payload: [{title: 'Lev Belenky', subtitle: 'Software Developer'},
+        {title: 'Zigi Bigule', subtitle: 'Software Engineer'}],
+      },
+      {
+        payload: [{title: 'Arie Bell', subtitle: 'Software Developer'},
+        {title: 'Daniel Zigi', subtitle: 'Software Engineer'}],
+      },
+      {
+        payload: [{title: 'Foo Bar', subtitle: 'Software Developer'},
+        {title: 'Barr Foo', subtitle: 'Software Engineer'},
+        {title: 'Hoo Haa', subtitle: 'Boo Baa'}],
+      }
+]
 
 async function getFeedItems(ctx) {
-    ctx.body = {
-      payload: [{title: 'Arie Belenky', subtitle: 'Software Developer'},
-      {title: 'Zigi Bigule', subtitle: 'Software Engineer'}],
-    };
+    // ctx.body = {
+    //   payload: [{title: 'Arie Belenky', subtitle: 'Software Developer'},
+    //   {title: 'Zigi Bigule', subtitle: 'Software Engineer'}],
+    // };
     // ctx.body = redisClient.hgetall((err, obj)=>{
     //     return obj;
     // }); 
+    ctx.body = mockDB[Math.floor(Math.random() * 4)]
     ctx.status = 200;
   }
 

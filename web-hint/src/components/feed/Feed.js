@@ -12,9 +12,11 @@ class Feed extends Component {
         }
     }
     componentDidMount(){
-        FeedConsumer.getFeedItems().then((feedItems)=>{
-            this.setState({hints: feedItems.payload});
-        })
+        setInterval(()=>{
+            FeedConsumer.getFeedItems().then((feedItems)=>{
+                this.setState({hints: feedItems.payload});
+            })
+        }, 1000);
     }
 
     render() {
