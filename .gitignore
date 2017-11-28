@@ -1,3 +1,7 @@
 # ide stuff
 .idea
 .vscode
+
+#node modules
+web-hint/node_modules
+web-server/node_modules
