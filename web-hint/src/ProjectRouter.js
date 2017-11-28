@@ -5,12 +5,13 @@ import {
   Link
 } from 'react-router-dom'
 import App from './App';
+import AsyncApp from './containers/AsyncApp'
 
 const Home = () => (
   <div>
     <App />
   </div>
-)
+);
 
 const About = () => (
   <div>
@@ -57,16 +58,17 @@ const ProjectRouter = () => (
     <div>
       <ul>
         <li><Link to="/">Home</Link></li>
+          <li><Link to="/reduxsite">ReduxSite</Link></li>
         <li><Link to="/about">About</Link></li>
         <li><Link to="/topics">Topics</Link></li>
       </ul>
 
       <hr/>
-
       <Route exact path="/" component={Home}/>
+      <Route exact path="/reduxsite" component={AsyncApp}/>
       <Route path="/about" component={About}/>
       <Route path="/topics" component={Topics}/>
     </div>
   </Router>
-)
+);
 export default ProjectRouter

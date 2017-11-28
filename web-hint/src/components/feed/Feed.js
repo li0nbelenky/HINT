@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import './Feed.css';
 import Hint from '../hint/Hint'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import FeedConsumer from './FeedConsumer'
-
-// const myArray = [{title: 'Arie Belenky', subtitle: 'Software Developer'},
-//     {title: 'Zigi Bigule', subtitle: 'Software Engineer'}];
-
+import { Feed as SemFeed, Icon } from 'semantic-ui-react'
 
 class Feed extends Component {
     constructor() {
@@ -23,15 +19,11 @@ class Feed extends Component {
 
     render() {
         return (
-            <MuiThemeProvider>
-                <div className="Feed">
-                    <ul>
-                        {this.state.hints.map((item, index) =>
-                            <li> <Hint title = {item.title} subtitle={item.subtitle} /></li>
-                        )}
-                    </ul>
-                </div>
-            </MuiThemeProvider>
+            <SemFeed>
+                 {this.state.hints.map((item, index) =>
+                     <Hint title = {item.title} subtitle={item.subtitle} />
+                 )}
+            </SemFeed>
         );
     }
 }
