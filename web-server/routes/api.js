@@ -158,11 +158,38 @@ async function createNewNotification(ctx) {
     }
 }
 
+async function getNotificationsByUserID(ctx) {
+    console.log(ctx.params);
+
+    let userID = ctx.params.userID;
+
+    try {
+        // check if user exists
+        await database.getUserByID(userID);
+
+        let notifications = await database.getNotificationsByUserID(userID);
+
+        ctx.body = {
+            status: true,
+            user_id: userID,
+            notifications: notifications
+        };
+        ctx.status = 200;
+    } catch (ex) {
+        console.error(ex);
+
+        ctx.body = ex;
+        ctx.status = 400;
+    }
+}
+
 router.get('/health', health);
 
 router.post('/hint/create', createNewHint);
 router.post('/user/create', createNewUser);
-router.post('/notification/create', createNewNotification)
+router.post('/notification/create', createNewNotification);
+
+router.get('/notification/:userID', getNotificationsByUserID)
 
 
 router.get('/feed', getFeedItems);
