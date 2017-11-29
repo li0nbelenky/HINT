@@ -35,3 +35,5 @@ docker network create hintnet
 docker login -u ironsrcci -p 6f3TqGoqmj
 addgroup ubuntu docker
 sudo usermod -a -G docker ubuntu
+
+sudo su ubuntu -c /home/ubuntu/infra/start-services-staging.sh
