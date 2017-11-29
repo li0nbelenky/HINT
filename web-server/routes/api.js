@@ -85,17 +85,48 @@ async function createNewHint(ctx) {
         ctx.body = ex;
         ctx.status = 400;
     }
-
 }
 
-router.get('/feed', getFeedItems);
+async function createNewUser(ctx) {
+    let user = ctx.request.body;
+
+    let keys = ['id', 'name', 'role', 'department', 'office_number'];
+
+    if (!helper.validateObjectKeys(keys, user, ctx)) {
+        return;
+    }
+
+    try {
+        let isUserExist = await database.checkUserExist(user.id);
+        if (!isUserExist) {
+            await database.addNewUser(user);
+
+            ctx.body = {
+                status: true,
+                id: user.id
+            };
+
+            ctx.status = 200;
+        } else {
+            let errorResponse = 'User with id: ' + user.id + ' already exist!';
+            console.error(errorResponse);
+
+            ctx.body = errorResponse;
+            ctx.status = 400;
+        }
+
+    } catch (ex) {
+        console.error(ex);
+
+        ctx.body = ex;
+        ctx.status = 400;
+    }
+}
 
 router.post('/hint/create', createNewHint);
+router.post('/user/create', createNewUser);
 
+router.get('/feed', getFeedItems);
 router.post('/follow', addFollowerToHint);
-
-router.get('/latesthints', )
-
-
 
 module.exports = router;
