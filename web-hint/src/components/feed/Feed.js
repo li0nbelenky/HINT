@@ -31,7 +31,7 @@ class Feed extends Component {
         <AddHint />
         <SemFeed>
           {this.state.hints.map((item, index) => (
-            <Hint key={item.key} {...item} />
+            <Hint key={item.id} {...item} />
           ))}
         </SemFeed>
       </div>

@@ -23,27 +23,27 @@ process.on('uncaughtException', function(err) {
 const mockDB = [
   {
     payload: [
-      { title: 'Arie Belenky', subtitle: 'Software Developer', key: uuidv4() },
-      { title: 'Bigi Zigule', subtitle: 'Software Engineer', key: uuidv4() }
+      { title: 'Arie Belenky', subtitle: 'Software Developer', id: uuidv4() },
+      { title: 'Bigi Zigule', subtitle: 'Software Engineer', id: uuidv4() }
     ]
   },
   {
     payload: [
-      { title: 'Lev Belenky', subtitle: 'Software Developer', key: uuidv4() },
-      { title: 'Zigi Bigule', subtitle: 'Software Engineer', key: uuidv4() }
+      { title: 'Lev Belenky', subtitle: 'Software Developer', id: uuidv4() },
+      { title: 'Zigi Bigule', subtitle: 'Software Engineer', id: uuidv4() }
     ]
   },
   {
     payload: [
-      { title: 'Arie Bell', subtitle: 'Software Developer', key: uuidv4() },
-      { title: 'Daniel Zigi', subtitle: 'Software Engineer', key: uuidv4() }
+      { title: 'Arie Bell', subtitle: 'Software Developer', id: uuidv4() },
+      { title: 'Daniel Zigi', subtitle: 'Software Engineer', id: uuidv4() }
     ]
   },
   {
     payload: [
-      { title: 'Foo Bar', subtitle: 'Software Developer', key: uuidv4() },
-      { title: 'Barr Foo', subtitle: 'Software Engineer', key: uuidv4() },
-      { title: 'Hoo Haa', subtitle: 'Boo Baa', key: uuidv4() }
+      { title: 'Foo Bar', subtitle: 'Software Developer', id: uuidv4() },
+      { title: 'Barr Foo', subtitle: 'Software Engineer', id: uuidv4() },
+      { title: 'Hoo Haa', subtitle: 'Boo Baa', id: uuidv4() }
     ]
   }
 ];
@@ -60,6 +60,17 @@ async function getFeedItems(ctx) {
   ctx.status = 200;
 }
 
+async function addFollowerToHint(ctx) {
+  try {
+    console.log('ctx.request.body');
+    console.log(ctx.request.body);
+    // validate all needed props were sent to the server
+    // redisClient.set(ctx.request.body.hintId, ctx.request);
+    ctx.status = 200;
+  } catch (e) {
+    ctx.status = 400;
+  }
+}
 async function createNewHint(ctx) {
   try {
     redisClient.set(ctx.request.body.hintId, ctx.request);
@@ -72,6 +83,7 @@ async function createNewHint(ctx) {
 router.get('/feed', getFeedItems);
 
 router.post('/createhint', createNewHint);
+router.post('/follow', addFollowerToHint);
 
 app.listen(8000);
 
