@@ -19,11 +19,11 @@ module.exports = {
             let params = {
                 TableName: config.aws.users_table,
                 Key: {
-                    id : id
+                    id: id
                 }
             };
 
-            docClient.get(params, function(err, data) {
+            docClient.get(params, function (err, data) {
                 if (err) {
                     reject(err);
                 } else {
@@ -42,11 +42,11 @@ module.exports = {
             let params = {
                 TableName: config.aws.users_table,
                 Key: {
-                    id : id
+                    id: id
                 }
             };
 
-            docClient.get(params, function(err, data) {
+            docClient.get(params, function (err, data) {
                 if (err) {
                     reject(err);
                 } else {
@@ -65,11 +65,11 @@ module.exports = {
             let params = {
                 TableName: config.aws.hints_table,
                 Key: {
-                    uid : uid
+                    uid: uid
                 }
             };
 
-            docClient.get(params, function(err, data) {
+            docClient.get(params, function (err, data) {
                 if (err) {
                     reject(err);
                 } else {
@@ -149,17 +149,15 @@ module.exports = {
         });
     },
 
-    getDepartments : function () {
+    getDepartments: function () {
         // console.log(config.AWS.REGION)
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
             let params = {
                 TableName: config.AWS.DEPARTMENTS_TABLE,
-                Key: {
-
-                }
+                Key: {}
             };
 
-            docClient.scan(params, function(err, data) {
+            docClient.scan(params, function (err, data) {
                 if (err) {
                     reject(err);
                 } else {
@@ -169,9 +167,9 @@ module.exports = {
         });
     },
 
-    getHintsByHelperDep : function (dep) {
+    getHintsByHelperDep: function (dep) {
         // console.log(dep)
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
             let params = {
                 TableName: config.AWS.HINTS_TABLE,
 
@@ -180,10 +178,10 @@ module.exports = {
                     "#helper_dep": "helper_dep",
                     "#status": "status",
                 },
-                ExpressionAttributeValues: { ":helper_dep": dep, ":status": "closed" }
+                ExpressionAttributeValues: {":helper_dep": dep, ":status": "closed"}
             };
 
-            docClient.scan(params, function(err, data) {
+            docClient.scan(params, function (err, data) {
                 if (err) {
                     reject(err);
                 } else {
@@ -191,4 +189,5 @@ module.exports = {
                 }
             });
         });
+    }
 }
