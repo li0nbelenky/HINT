@@ -196,6 +196,21 @@ async function getNotificationsByUserID(ctx) {
     }
 }
 
+async function getHintsByTagDepStatus(ctx) {
+    let requests = ctx.request.body;
+    let tags = requests['tags']
+    let dep = requests['dep']
+    let status = requests['status']
+    await functions.getHintsByTagDepStatus(tags, dep, status).then(function(data){
+        console.log("sdsd", data)
+        // console.log("labels", labels)
+        ctx.body = {
+            status: true,
+            data: data
+        }
+    })
+}
+
 router.get('/health', health);
 
 router.post('/hint/create', createNewHint);
@@ -209,5 +224,6 @@ router.get('/feed', getFeedItems);
 router.post('/follow', addFollowerToHint);
 
 router.get('/departments_impact', departments_impact);
+router.post('/getHintsByTagDepStatus', getHintsByTagDepStatus);
 
 module.exports = router;
