@@ -16,7 +16,7 @@ class AddHint extends Component {
 
     return (
       <div>
-        <Button onClick={this.show('large')}>Add hint</Button>
+        <a onClick={this.show('large')}>Add hint</a>
 
         <Modal size={size} open={open} onClose={this.close}>
           <Modal.Header>Delete Your Account</Modal.Header>
