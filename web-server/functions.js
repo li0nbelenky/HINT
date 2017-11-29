@@ -1,7 +1,7 @@
 database = require('./database');
 _ = require("lodash/fp");
 
-const run = async ()=> {
+const getDepartmentsImpact = async ()=> {
     let deps = await database.getDepartments();
 
     let labels = [];
@@ -32,8 +32,8 @@ const run = async ()=> {
 }
 
 const sortResults = function (results) {
-    console.log(results)
-    // Create items array
+    let data = {"labels": [], "data": []}
+    let count = 5;
     let items = Object.keys(results).map(function(key) {
         return [key, results[key]];
     });
@@ -43,15 +43,22 @@ const sortResults = function (results) {
         return second[1] - first[1];
     });
 
+    for (let i in items){
+        console.log(items[i])
+        data['labels'] = data['labels'].concat(items[i][0])
+        data['data'] = data['data'].concat(items[i][1])
+    }
+    console.log(data)
+
 // Create a new array with only the first 5 items
-    console.log(items.slice(0, 5));
+//     console.log(items.slice(0, 5));
 }
 
 module.exports = {
-    run,
+    getDepartmentsImpact,
     sortResults
 }
 
-// run()
+getDepartmentsImpact()
 
-sortResults({ IC: 10, Infra: 25 })
+// sortResults({ IC: 10, Infra: 25, Mobile: 20, Video: 40, Super: 100, Aura: 1 })

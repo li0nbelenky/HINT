@@ -1,4 +1,5 @@
 'use strict';
+const functions = require('../functions');
 
 const Router = require('koa-router'),
       router = new Router(),
@@ -74,9 +75,19 @@ async function createNewHint(ctx) {
     }
 }
 
+async function departments_impact(req, res, next) {
+    try {
+        let impact = functions.getDepartmentsImpact()
+        res.send(impact)
+    } catch (e) {
+        res.status = 400;
+    }
+}
+
 router.get('/feed', getFeedItems);
 
 router.post('/createhint', createNewHint);
 router.post('/follow', addFollowerToHint);
+router.post('/departments_impact', departments_impact);
 
 module.exports = router;
