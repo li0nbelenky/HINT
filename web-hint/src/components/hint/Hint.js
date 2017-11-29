@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Feed as SemFeed, Card, Icon, Image } from 'semantic-ui-react';
+import NewActivity from '../FeedActivityItems/NewActivity';
+import FrogMatchActivity from '../FeedActivityItems/FrogMatchActivity';
+import ResolvedActivity from '../FeedActivityItems/ResolvedActivity';
 
 class Hint extends Component {
   constructor(props) {
@@ -17,30 +19,18 @@ class Hint extends Component {
       subtitle
     });
 
-    console.log('clicked a like');
+    console.log('Clicked a Follow');
   }
   render() {
-    return (
-      <div className="Hint">
-        <SemFeed.Event>
-          {/*<SemFeed.Label>*/}
-          {/*<img src='/assets/images/avatar/small/elliot.jpg' />*/}
-          {/*</SemFeed.Label>*/}
-          <SemFeed.Content>
-            <SemFeed.Summary>
-              <SemFeed.User>{this.props.title}</SemFeed.User> Created a new HINT
-              <SemFeed.Date>1 Hour Ago</SemFeed.Date>
-            </SemFeed.Summary>
-            <SemFeed.Meta onClick={this.handleClick}>
-              <SemFeed.Like>
-                <Icon name="like" />
-                4 Likes
-              </SemFeed.Like>
-            </SemFeed.Meta>
-          </SemFeed.Content>
-        </SemFeed.Event>
-      </div>
-    );
+      if (this.props.action === 'New hint') {
+        return <NewActivity key={this.props.id} {...this.props} />
+      } else if (this.props.action === 'Frog match') {
+          return <FrogMatchActivity key={this.props.id} {...this.props} />
+      } else if (this.props.action === 'Resolved') {
+          return <ResolvedActivity key={this.props.id} {...this.props} />
+      } else {
+          return <div>Unknown type of Activity</div>
+      }
   }
 }
 

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './Feed.css';
-import Hint from '../hint/Hint';
 import FeedConsumer from './FeedConsumer';
 import _ from 'lodash/fp';
+import Hint from '../hint/Hint';
 import { Feed as SemFeed, Icon, Button, Modal } from 'semantic-ui-react';
 
 class Feed extends Component {
@@ -28,9 +28,9 @@ class Feed extends Component {
     return (
       <div className="name">
         <SemFeed>
-          {this.state.hints.map((item, index) => (
-            <Hint key={item.id} {...item} />
-          ))}
+            {this.state.hints.map((item, index) => (
+                <Hint key={item.id} {...item} />
+            ))}
         </SemFeed>
       </div>
     );
