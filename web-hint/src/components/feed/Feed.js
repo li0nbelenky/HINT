@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Feed.css';
 import Hint from '../hint/Hint';
 import FeedConsumer from './FeedConsumer';
+import _ from 'lodash/fp';
 import { Feed as SemFeed, Icon } from 'semantic-ui-react';
 
 class Feed extends Component {
@@ -14,7 +15,11 @@ class Feed extends Component {
   componentDidMount() {
     setInterval(() => {
       FeedConsumer.getFeedItems().then(feedItems => {
-        this.setState({ hints: feedItems.payload });
+        feedItems = _.sortBy('title')(feedItems.payload);
+        const currentHints = _.sortBy('title')(this.state.hints);
+        _.isEqual(feedItems)(currentHints)
+          ? console.log('no change')
+          : this.setState({ hints: feedItems });
       });
     }, 1000);
   }
