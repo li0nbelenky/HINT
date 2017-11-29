@@ -38,23 +38,29 @@ class TopDepartment extends Component {
         'http://localhost:8000/departments_impact'
       ).then(departmentsData => {
         const { labels, data } = departmentsData;
-        this.setState({
-          ...this.state,
-          data: {
-            labels: labels,
-            datasets: [
-              {
-                label: 'My First dataset',
-                backgroundColor: 'rgba(255,99,132,0.2)',
-                borderColor: 'rgba(255,99,132,1)',
-                borderWidth: 1,
-                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                hoverBorderColor: 'rgba(255,99,132,1)',
-                data: data
+        const changed = _.isEqual(
+          [...departmentsData].sort(),
+          [...this.state.data].sort()
+        );
+        changed
+          ? this.setState({
+              ...this.state,
+              data: {
+                labels: labels,
+                datasets: [
+                  {
+                    label: 'My First dataset',
+                    backgroundColor: 'rgba(255,99,132,0.2)',
+                    borderColor: 'rgba(255,99,132,1)',
+                    borderWidth: 1,
+                    hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                    hoverBorderColor: 'rgba(255,99,132,1)',
+                    data: data
+                  }
+                ]
               }
-            ]
-          }
-        });
+            })
+          : console.log('no change needed');
       });
     }, 1000);
   }

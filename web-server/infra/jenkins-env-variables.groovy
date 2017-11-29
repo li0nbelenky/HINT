@@ -1,0 +1,6 @@
+env.DOCKER_REPO='ironsource/hint-web-server'
+env.COMPONENT='web-server'
+env.ASG_staging='tag_aws_autoscaling_groupName_hint_staging'
+env.ASG_master='tag_aws_autoscaling_groupName_hint_master'
+env.PUSHREQUEST_URL='https://rproxy.ironsrc.com/rest/api/1.0/projects/IAVC/repos/extractor/pull-requests'
+env.PUSHREQUEST_TEXT='{ "title": "jenkinsPullRequest","description":"Pull request created by jenkins ci cd process","state":"OPEN","open":true,"closed":false,"fromRef":{"id":"refs/heads/staging","repository":{"slug":"extractor","name":null,"project":{"key":"iavc"}}},"toRef":{"id":"refs/heads/master","repository":{"slug":"extractor","name":null,"project":{"key":"iavc"}}},"locked":false}'
