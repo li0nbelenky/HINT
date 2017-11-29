@@ -1,21 +1,17 @@
 const env = process.env.NODE_ENV || 'development';
 
-
-if(env === 'master' || 'staging'){
+if (env === 'master' || env === 'staging') {
   var config = {
-    config : {
+    config: {
       WEBSERVER: 'web-server'
     }
-  }
+  };
 } else {
   var config = {
-    config : {
+    config: {
       WEBSERVER: 'localhost'
     }
-  }
-
+  };
 }
-
-
 
 export default config.config;
