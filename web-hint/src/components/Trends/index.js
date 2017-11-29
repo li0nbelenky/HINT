@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 // import { Chart } from 'chart.js';
-import { Line } from 'react-chartjs';
+// import { Line } from 'react-chartjs';
+import TopDepartment from '../TopDepartment';
+import TagTrends from '../TagTrends';
 const data = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
   datasets: [
@@ -44,8 +46,10 @@ class Trends extends Component {
   render() {
     return (
       <div className="Trends">
-        <Line data={data} />
+        {/* <Line data={data} /> */}
         <h1>Trends</h1>
+        <TopDepartment />
+        <TagTrends/>
       </div>
     );
   }
