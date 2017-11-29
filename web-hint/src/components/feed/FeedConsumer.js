@@ -1,4 +1,6 @@
 import request from 'request';
+import config from '../../config/config';
+
 
 const myArray = [{title: 'Arie Belenky', subtitle: 'Software Developer'},
     {title: 'Zigi Bigule', subtitle: 'Software Engineer'}];
@@ -23,7 +25,7 @@ const promisifiedRequest = (url, method, obj)=>{
 
 class FeedConsumer{
     static getFeedItems(){
-        return promisifiedRequest('http://localhost:8000/feed', 'GET').then((feedItems)=>{
+        return promisifiedRequest(`http://${config.WEBSERVER}:8000/feed`, 'GET').then((feedItems)=>{
             return feedItems
         }).catch((err)=>{
             return err

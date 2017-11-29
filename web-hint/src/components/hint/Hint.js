@@ -3,6 +3,8 @@ import axios from 'axios';
 import NewActivity from '../FeedActivityItems/NewActivity';
 import FrogMatchActivity from '../FeedActivityItems/FrogMatchActivity';
 import ResolvedActivity from '../FeedActivityItems/ResolvedActivity';
+import config from '../../config/config';
+
 
 class Hint extends Component {
   constructor(props) {
@@ -13,7 +15,7 @@ class Hint extends Component {
   async handleClick() {
     console.log(this.props.title);
     const { title, id, subtitle } = this.props;
-    let res = axios.post('http://localhost:8000/follow', {
+    let res = axios.post(`http://${config.WEBSERVER}:8000/follow`, {
       title,
       id,
       subtitle

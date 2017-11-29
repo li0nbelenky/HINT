@@ -7,12 +7,14 @@ const Router = require('koa-router'),
 
       config = require('../config/config'),
       database = require('../database'),
-      helper = require('../helper');
+      helper = require('../helper'),
 
-let redisClient = redis.createClient({
-    host: config.redis.host,
-    port: config.redis.port
-});
+    functions = require('../functions');
+
+// let redisClient = redis.createClient({
+//     host: config.redis.host,
+//     port: config.redis.port
+// });
 
 const mockDB = [
     {
@@ -256,14 +258,70 @@ async function createNewNotification(ctx) {
     }
 }
 
+async function departments_impact(ctx) {
+    let data;
+    await functions.getDepartmentsImpact().then(function(data){
+        console.log(data)
+        ctx.body = {
+            status: true,
+            data: data
+        }
+    })
+}
+
+async function getNotificationsByUserID(ctx) {
+    console.log(ctx.params);
+
+    let userID = ctx.params.userID;
+
+    try {
+        // check if user exists
+        await database.getUserByID(userID);
+
+        let notifications = await database.getNotificationsByUserID(userID);
+
+        ctx.body = {
+            status: true,
+            user_id: userID,
+            notifications: notifications
+        };
+        ctx.status = 200;
+    } catch (ex) {
+        console.error(ex);
+
+        ctx.body = ex;
+        ctx.status = 400;
+    }
+}
+
+async function getHintsByTagDepStatus(ctx) {
+    let requests = ctx.request.body;
+    let tags = requests['tags']
+    let dep = requests['dep']
+    let status = requests['status']
+    await functions.getHintsByTagDepStatus(tags, dep, status).then(function(data){
+        console.log("sdsd", data)
+        // console.log("labels", labels)
+        ctx.body = {
+            status: true,
+            data: data
+        }
+    })
+}
+
 router.get('/health', health);
 
 router.post('/hint/create', createNewHint);
 router.post('/user/create', createNewUser);
-router.post('/notification/create', createNewNotification)
+router.post('/notification/create', createNewNotification);
+
+router.get('/notification/:userID', getNotificationsByUserID)
 
 
 router.get('/feed', getFeedItems);
 router.post('/follow', addFollowerToHint);
+
+router.get('/departments_impact', departments_impact);
+router.post('/getHintsByTagDepStatus', getHintsByTagDepStatus);
 
 module.exports = router;

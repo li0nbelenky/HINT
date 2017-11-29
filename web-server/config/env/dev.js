@@ -8,11 +8,13 @@ module.exports = {
         region: 'eu-central-1',
         hints_table: 'hints',
         users_table: 'users',
-        notifications_table: 'notifications'
+        notifications_table: 'notifications',
+        departments_table: "departments"
     },
 
     redis: {
         host: 'localhost',
         port: 6379
-    }
+    },
+
 };

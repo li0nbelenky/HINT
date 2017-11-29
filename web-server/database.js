@@ -19,11 +19,11 @@ module.exports = {
             let params = {
                 TableName: config.aws.users_table,
                 Key: {
-                    id: id
+                    id : id
                 }
             };
 
-            docClient.get(params, function (err, data) {
+            docClient.get(params, function(err, data) {
                 if (err) {
                     reject(err);
                 } else {
@@ -42,11 +42,11 @@ module.exports = {
             let params = {
                 TableName: config.aws.users_table,
                 Key: {
-                    id: id
+                    id : id
                 }
             };
 
-            docClient.get(params, function (err, data) {
+            docClient.get(params, function(err, data) {
                 if (err) {
                     reject(err);
                 } else {
@@ -65,11 +65,11 @@ module.exports = {
             let params = {
                 TableName: config.aws.hints_table,
                 Key: {
-                    uid: uid
+                    uid : uid
                 }
             };
 
-            docClient.get(params, function (err, data) {
+            docClient.get(params, function(err, data) {
                 if (err) {
                     reject(err);
                 } else {
@@ -137,7 +137,7 @@ module.exports = {
             let params = {
                 TableName: config.aws.notifications_table,
                 Item: notification
-            }
+            };
 
             docClient.put(params, function (err, res) {
                 if (err) {
@@ -149,15 +149,51 @@ module.exports = {
         });
     },
 
-    getDepartments: function () {
-        // console.log(config.AWS.REGION)
+    getNotificationsByUserID: function (userID) {
         return new Promise(function (resolve, reject) {
             let params = {
-                TableName: config.AWS.DEPARTMENTS_TABLE,
-                Key: {}
+                TableName: config.aws.notifications_table,
+                FilterExpression: "#user_id = :user_id",
+                ExpressionAttributeNames: {
+                    "#user_id": "user_id"
+                },
+                ExpressionAttributeValues: {
+                    ":user_id": userID
+                }
             };
 
-            docClient.scan(params, function (err, data) {
+            let resultData = []
+            function onScan(err, data) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resultData = resultData.concat(data['Items']);
+
+                    if (typeof data.LastEvaluatedKey != "undefined") {
+                        console.log("Scanning for more...");
+                        params.ExclusiveStartKey = data.LastEvaluatedKey;
+                        docClient.scan(params, onScan);
+                    } else {
+                        resolve(resultData);
+                    }
+                }
+            }
+
+            docClient.scan(params, onScan);
+        });
+    },
+
+    getDepartments : function () {
+        // console.log(config.AWS.REGION)
+        return new Promise(function(resolve, reject) {
+            let params = {
+                TableName: config.aws.departments_table,
+                Key: {
+
+                }
+            };
+
+            docClient.scan(params, function(err, data) {
                 if (err) {
                     reject(err);
                 } else {
@@ -167,11 +203,11 @@ module.exports = {
         });
     },
 
-    getHintsByHelperDep: function (dep) {
+    getHintsByHelperDep : function (dep) {
         // console.log(dep)
         return new Promise(function (resolve, reject) {
             let params = {
-                TableName: config.AWS.HINTS_TABLE,
+                TableName: config.aws.hints_table,
 
                 FilterExpression: "#helper_dep = :helper_dep and #status= :status",
                 ExpressionAttributeNames: {
@@ -180,6 +216,33 @@ module.exports = {
                 },
                 ExpressionAttributeValues: {":helper_dep": dep, ":status": "closed"}
             };
+
+            docClient.scan(params, function (err, data) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(data['Items'])
+                }
+            });
+        });
+    },
+
+    getHintsByTag : function (dep, status) {
+        return new Promise(function (resolve, reject) {
+            let params = {
+                TableName: config.aws.hints_table,
+
+                FilterExpression: "#user_department = :user_department and #status= :status",
+                ExpressionAttributeNames: {
+                    "#user_department": "user_department",
+                    "#status": "status",
+                },
+                ExpressionAttributeValues: {":status": status},
+            };
+
+            if (dep !== '*'){
+                params['ExpressionAttributeValues'][':user_department'] = dep
+            }
 
             docClient.scan(params, function (err, data) {
                 if (err) {

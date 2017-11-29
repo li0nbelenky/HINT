@@ -28,9 +28,9 @@ class Feed extends Component {
     return (
       <div className="name">
         <SemFeed>
-            {this.state.hints.map((item, index) => (
-                <Hint key={item.id} {...item} />
-            ))}
+          {this.state.hints.map((item, index) => (
+            <Hint key={item.id} {...item} />
+          ))}
         </SemFeed>
       </div>
     );
