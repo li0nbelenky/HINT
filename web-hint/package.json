@@ -5,7 +5,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
-    "chart.js": "^1.1.1",
+    "chart.js": "^2.7.1",
     "create-react-class": "^15.6.2",
     "cross-fetch": "^1.1.1",
     "eslint-plugin-react": "^7.5.1",
@@ -16,6 +16,7 @@
     "pusher-js": "^4.2.1",
     "react": "^15.6.2",
     "react-chartjs": "^0.8.0",
+    "react-chartjs-2": "^2.6.4",
     "react-dom": "^15.6.2",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
