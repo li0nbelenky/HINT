@@ -187,7 +187,7 @@ module.exports = {
         // console.log(config.AWS.REGION)
         return new Promise(function(resolve, reject) {
             let params = {
-                TableName: config.AWS.DEPARTMENTS_TABLE,
+                TableName: config.aws.departments_table,
                 Key: {
 
                 }
@@ -207,7 +207,7 @@ module.exports = {
         // console.log(dep)
         return new Promise(function (resolve, reject) {
             let params = {
-                TableName: config.AWS.HINTS_TABLE,
+                TableName: config.aws.hints_table,
 
                 FilterExpression: "#helper_dep = :helper_dep and #status= :status",
                 ExpressionAttributeNames: {
@@ -216,6 +216,33 @@ module.exports = {
                 },
                 ExpressionAttributeValues: {":helper_dep": dep, ":status": "closed"}
             };
+
+            docClient.scan(params, function (err, data) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(data['Items'])
+                }
+            });
+        });
+    },
+
+    getHintsByTag : function (dep, status) {
+        return new Promise(function (resolve, reject) {
+            let params = {
+                TableName: config.aws.hints_table,
+
+                FilterExpression: "#user_department = :user_department and #status= :status",
+                ExpressionAttributeNames: {
+                    "#user_department": "user_department",
+                    "#status": "status",
+                },
+                ExpressionAttributeValues: {":status": status},
+            };
+
+            if (dep !== '*'){
+                params['ExpressionAttributeValues'][':user_department'] = dep
+            }
 
             docClient.scan(params, function (err, data) {
                 if (err) {

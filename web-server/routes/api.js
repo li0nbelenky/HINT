@@ -7,12 +7,14 @@ const Router = require('koa-router'),
 
       config = require('../config/config'),
       database = require('../database'),
-      helper = require('../helper');
+      helper = require('../helper'),
 
-let redisClient = redis.createClient({
-    host: config.redis.host,
-    port: config.redis.port
-});
+    functions = require('../functions');
+
+// let redisClient = redis.createClient({
+//     host: config.redis.host,
+//     port: config.redis.port
+// });
 
 const mockDB = [
     {
@@ -158,6 +160,17 @@ async function createNewNotification(ctx) {
     }
 }
 
+async function departments_impact(ctx) {
+    let data;
+    await functions.getDepartmentsImpact().then(function(data){
+        console.log(data)
+        ctx.body = {
+            status: true,
+            data: data
+        }
+    })
+}
+
 async function getNotificationsByUserID(ctx) {
     console.log(ctx.params);
 
@@ -194,5 +207,7 @@ router.get('/notification/:userID', getNotificationsByUserID)
 
 router.get('/feed', getFeedItems);
 router.post('/follow', addFollowerToHint);
+
+router.get('/departments_impact', departments_impact);
 
 module.exports = router;
