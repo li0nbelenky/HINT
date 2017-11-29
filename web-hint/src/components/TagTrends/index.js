@@ -67,13 +67,9 @@ class TagTrends extends Component {
   }
   componentDidMount() {
     setInterval(() => {
-<<<<<<< HEAD
       axios(
         'http://localhost:8000/departments_trends?status=open&department=supersonic&tags=nodejs,angular,python&time_range=3_month'
       ).then(tagTrends => {
-=======
-      axios('http://localhost:8000/tag_trends').then(tagTrends => {
->>>>>>> Initial work on tags finished
         // check if the trends have changed
 
         const changed = _.isEqual(
