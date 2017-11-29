@@ -153,7 +153,7 @@ module.exports = {
         // console.log(config.AWS.REGION)
         return new Promise(function(resolve, reject) {
             let params = {
-                TableName: config.AWS.DEPARTMENTS_TABLE,
+                TableName: config.aws.departments_table,
                 Key: {
 
                 }
@@ -171,19 +171,19 @@ module.exports = {
 
     getHintsByHelperDep : function (dep) {
         // console.log(dep)
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
             let params = {
-                TableName: config.AWS.HINTS_TABLE,
+                TableName: config.aws.hints_table,
 
                 FilterExpression: "#helper_dep = :helper_dep and #status= :status",
                 ExpressionAttributeNames: {
                     "#helper_dep": "helper_dep",
                     "#status": "status",
                 },
-                ExpressionAttributeValues: { ":helper_dep": dep, ":status": "closed" }
+                ExpressionAttributeValues: {":helper_dep": dep, ":status": "closed"}
             };
 
-            docClient.scan(params, function(err, data) {
+            docClient.scan(params, function (err, data) {
                 if (err) {
                     reject(err);
                 } else {
@@ -191,4 +191,28 @@ module.exports = {
                 }
             });
         });
+    },
+
+    getHintsByTag : function (dep, status) {
+        return new Promise(function (resolve, reject) {
+            let params = {
+                TableName: config.aws.hints_table,
+
+                FilterExpression: "#user_department = :user_department and #status= :status",
+                ExpressionAttributeNames: {
+                    "#user_department": "user_department",
+                    "#status": "status",
+                },
+                ExpressionAttributeValues: {":user_department": dep, ":status": status}
+            };
+
+            docClient.scan(params, function (err, data) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(data['Items'])
+                }
+            });
+        });
+    },
 }
