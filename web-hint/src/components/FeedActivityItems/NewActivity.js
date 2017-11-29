@@ -23,9 +23,9 @@ class NewActivity extends Component {
         return (
             <div className="NewActivity">
                 <SemFeed.Event>
-                    {/*<SemFeed.Label>*/}
-                    {/*<img src='/assets/images/avatar/small/elliot.jpg' />*/}
-                    {/*</SemFeed.Label>*/}
+                    <SemFeed.Label>
+                        <img src='./elliot.jpg' />
+                    </SemFeed.Label>
                     <SemFeed.Content>
                         <SemFeed.Summary>
                             <SemFeed.User>{this.props.user_full_name}</SemFeed.User> Created a new HINT
@@ -36,7 +36,7 @@ class NewActivity extends Component {
                         </SemFeed.Extra>
                         <SemFeed.Meta onClick={this.handleClick}>
                             <SemFeed.Like>
-                                <Icon name="Follow" />
+                                <Icon name="bell outline" />
                                 {this.props.followers.length} Followers
                             </SemFeed.Like>
                         </SemFeed.Meta>

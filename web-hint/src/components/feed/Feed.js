@@ -18,7 +18,7 @@ class Feed extends Component {
         feedItems = _.sortBy('title')(feedItems.payload);
         const currentHints = _.sortBy('title')(this.state.hints);
         _.isEqual(feedItems)(currentHints)
-          ? console.log('no change')
+          ? null
           : this.setState({ hints: feedItems });
       });
     }, 1000);

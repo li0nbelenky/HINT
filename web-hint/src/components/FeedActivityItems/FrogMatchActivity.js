@@ -23,9 +23,9 @@ class FrogMatchActivity extends Component {
         return (
             <div className="FrogMatchActivity">
                 <SemFeed.Event>
-                    {/*<SemFeed.Label>*/}
-                    {/*<img src='/assets/images/avatar/small/elliot.jpg' />*/}
-                    {/*</SemFeed.Label>*/}
+                    <SemFeed.Label>
+                        <img src='./elliot.jpg' />
+                    </SemFeed.Label>
                     <SemFeed.Content>
                         <SemFeed.Summary>
                             <SemFeed.User>{this.props.helper_full_name}</SemFeed.User> Froggy was matched to help <SemFeed.User>{this.props.user_full_name}</SemFeed.User>'s hint
@@ -36,7 +36,7 @@ class FrogMatchActivity extends Component {
                         </SemFeed.Extra>
                         <SemFeed.Meta onClick={this.handleClick}>
                             <SemFeed.Like>
-                                <Icon name="Follow" />
+                                <Icon name="bell outline" />
                                 {this.props.followers.length} Followers
                             </SemFeed.Like>
                         </SemFeed.Meta>
