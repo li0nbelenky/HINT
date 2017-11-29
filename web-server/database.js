@@ -14,7 +14,7 @@ AWS.config.update({
 let docClient = new AWS.DynamoDB.DocumentClient();
 
 module.exports = {
-    getUserByID: function(id) {
+    getUserByID: function (id) {
         return new Promise(function (resolve, reject) {
             let params = {
                 TableName: config.aws.users_table,
@@ -37,7 +37,30 @@ module.exports = {
         });
     },
 
-    addNewHint: function(hint) {
+    checkUserExist: function (id) {
+        return new Promise(function (resolve, reject) {
+            let params = {
+                TableName: config.aws.users_table,
+                Key: {
+                    id : id
+                }
+            };
+
+            docClient.get(params, function(err, data) {
+                if (err) {
+                    reject(err);
+                } else {
+                    if ('Item' in data) {
+                        resolve(true);
+                    } else {
+                        resolve(false);
+                    }
+                }
+            });
+        });
+    },
+
+    addNewHint: function (hint) {
         return new Promise(function (resolve, reject) {
             hint.uid = uuidv4();
 
@@ -49,6 +72,27 @@ module.exports = {
             let params = {
                 TableName: config.aws.hints_table,
                 Item: hint
+            }
+
+            docClient.put(params, function (err, res) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(res);
+                }
+            });
+        });
+    },
+
+    addNewUser: function (user) {
+        return new Promise(function (resolve, reject) {
+            user.open_hints = 0;
+            user.resolved_hints = [];
+            user.score = 0;
+
+            let params = {
+                TableName: config.aws.users_table,
+                Item: user
             }
 
             docClient.put(params, function (err, res) {
