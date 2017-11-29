@@ -19,34 +19,132 @@ const Router = require('koa-router'),
 const mockDB = [
     {
         payload: [
-            { title: 'Arie Belenky', subtitle: 'Software Developer', id: uuidv4() },
-            { title: 'Bigi Zigule', subtitle: 'Software Engineer', id: uuidv4() }
+            { action: 'New hint',
+                hint_id: uuidv4(),
+                user_id: uuidv4(),
+                user_full_name: 'Arie Belenky',
+                user_department: 'installCore',
+                title: 'Please help me create KOA web server with generator functions',
+                description: 'I try to yield from generator function and receive a reference to a Promise instead of the return value',
+                status: 'open',
+                tags: ['Node JS', 'KOA', 'Generators', 'ES6'],
+                views: 0,
+                followers: [],
+                solution: null,
+                created_ts: new Date().toJSON(),
+                updated_ts: new Date().toJSON(),
+                helper: null,
+                helper_full_name: null,
+                helper_department: null
+
+            },
+            { action: 'Frog match',
+                hint_id: uuidv4(),
+                user_id: uuidv4(),
+                user_full_name: 'Gil Cohen',
+                user_department: 'installCore',
+                title: 'Please help me create KOA web server with generator functions',
+                description: 'I try to yield from generator function and receive a reference to a Promise instead of the return value',
+                status: 'open',
+                tags: ['Node JS', 'KOA', 'Generators', 'ES6'],
+                views: 0,
+                followers: [uuidv4(), uuidv4(), uuidv4()],
+                solution: null,
+                created_ts: new Date().toJSON(),
+                updated_ts: new Date().toJSON(),
+                helper: uuidv4(),
+                helper_full_name: 'Arie Belenky',
+                helper_department: 'Infra'
+
+            },
+            { action: 'Resolved',
+                hint_id: uuidv4(),
+                user_id: uuidv4(),
+                user_full_name: 'Daniel Ledevich',
+                user_department: 'installCore',
+                title: 'Please help me create KOA web server with generator functions',
+                description: 'I try to yield from generator function and receive a reference to a Promise instead of the return value',
+                status: 'open',
+                tags: ['Node JS', 'KOA', 'Generators', 'ES6'],
+                views: 0,
+                followers: [uuidv4(), uuidv4(), uuidv4()],
+                solution: "RTFM",
+                created_ts: new Date().toJSON(),
+                updated_ts: new Date().toJSON(),
+                helper: uuidv4(),
+                helper_full_name: 'Arie Belenky',
+                helper_department: 'Infra'
+
+            }
         ]
     },
     {
         payload: [
-            { title: 'Lev Belenky', subtitle: 'Software Developer', id: uuidv4() },
-            { title: 'Zigi Bigule', subtitle: 'Software Engineer', id: uuidv4() }
-        ]
-    },
-    {
-        payload: [
-            { title: 'Arie Bell', subtitle: 'Software Developer', id: uuidv4() },
-            { title: 'Daniel Zigi', subtitle: 'Software Engineer', id: uuidv4() }
-        ]
-    },
-    {
-        payload: [
-            { title: 'Foo Bar', subtitle: 'Software Developer', id: uuidv4() },
-            { title: 'Barr Foo', subtitle: 'Software Engineer', id: uuidv4() },
-            { title: 'Hoo Haa', subtitle: 'Boo Baa', id: uuidv4() }
+            { action: 'New hint',
+                hint_id: uuidv4(),
+                user_id: uuidv4(),
+                user_full_name: 'Shany Shmuely',
+                user_department: 'installCore',
+                title: 'Please help me create KOA web server with generator functions',
+                description: 'I try to yield from generator function and receive a reference to a Promise instead of the return value',
+                status: 'open',
+                tags: ['Node JS', 'KOA', 'Generators', 'ES6'],
+                views: 0,
+                followers: [],
+                solution: null,
+                created_ts: new Date().toJSON(),
+                updated_ts: new Date().toJSON(),
+                helper: null,
+                helper_full_name: null,
+                helper_department: null
+
+            },
+            { action: 'Frog match',
+                hint_id: uuidv4(),
+                user_id: uuidv4(),
+                user_full_name: 'Lior Haiman',
+                user_department: 'installCore',
+                title: 'Please help me create KOA web server with generator functions',
+                description: 'I try to yield from generator function and receive a reference to a Promise instead of the return value',
+                status: 'open',
+                tags: ['Node JS', 'KOA', 'Generators', 'ES6'],
+                views: 0,
+                followers: [uuidv4(), uuidv4(), uuidv4()],
+                solution: null,
+                created_ts: new Date().toJSON(),
+                updated_ts: new Date().toJSON(),
+                helper: uuidv4(),
+                helper_full_name: 'Gil Cohen',
+                helper_department: 'Infra'
+
+            },
+            { action: 'Resolved',
+                hint_id: uuidv4(),
+                user_id: uuidv4(),
+                user_full_name: 'Dmytro Kostylov',
+                user_department: 'installCore',
+                title: 'Please help me create KOA web server with generator functions',
+                description: 'I try to yield from generator function and receive a reference to a Promise instead of the return value',
+                status: 'open',
+                tags: ['Node JS', 'KOA', 'Generators', 'ES6'],
+                views: 0,
+                followers: [uuidv4(), uuidv4(), uuidv4()],
+                solution: "RTFM",
+                created_ts: new Date().toJSON(),
+                updated_ts: new Date().toJSON(),
+                helper: uuidv4(),
+                helper_full_name: 'Valentine Pavchuk',
+                helper_department: 'Infra'
+
+            }
         ]
     }
 ];
 
 
+
 async function getFeedItems(ctx) {
-    ctx.body = mockDB[Math.floor(Math.random() * 4)];
+    ctx.body = mockDB[Math.floor(Math.random() * 2)];
     ctx.status = 200;
 }
 

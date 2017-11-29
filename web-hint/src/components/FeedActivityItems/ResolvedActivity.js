@@ -24,9 +24,9 @@ class ResolvedActivity extends Component {
         return (
             <div className="ResolvedActivity">
                 <SemFeed.Event>
-                    {/*<SemFeed.Label>*/}
-                    {/*<img src='/assets/images/avatar/small/elliot.jpg' />*/}
-                    {/*</SemFeed.Label>*/}
+                    <SemFeed.Label>
+                    <img src='./elliot.jpg' />
+                    </SemFeed.Label>
                     <SemFeed.Content>
                         <SemFeed.Summary>
                             <SemFeed.User>{this.props.helper_full_name}</SemFeed.User> Help resolve <SemFeed.User>{this.props.user_full_name}</SemFeed.User>'s hint, and is now a prince!
@@ -37,7 +37,7 @@ class ResolvedActivity extends Component {
                         </SemFeed.Extra>
                         <SemFeed.Meta onClick={this.handleClick}>
                             <SemFeed.Like>
-                                <Icon name="Follow" />
+                                <Icon name="bell outline" />
                                 {this.props.followers.length} Followers
                             </SemFeed.Like>
                         </SemFeed.Meta>
