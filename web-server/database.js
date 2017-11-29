@@ -60,6 +60,29 @@ module.exports = {
         });
     },
 
+    getHintByID: function (uid) {
+        return new Promise(function (resolve, reject) {
+            let params = {
+                TableName: config.aws.hints_table,
+                Key: {
+                    uid : uid
+                }
+            };
+
+            docClient.get(params, function(err, data) {
+                if (err) {
+                    reject(err);
+                } else {
+                    if ('Item' in data) {
+                        resolve(data.Item);
+                    } else {
+                        reject('Not found hint with uid: ' + uid);
+                    }
+                }
+            });
+        });
+    },
+
     addNewHint: function (hint) {
         return new Promise(function (resolve, reject) {
             hint.uid = uuidv4();
@@ -93,6 +116,27 @@ module.exports = {
             let params = {
                 TableName: config.aws.users_table,
                 Item: user
+            }
+
+            docClient.put(params, function (err, res) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(res);
+                }
+            });
+        });
+    },
+
+    addNewNotification: function (notification) {
+        return new Promise(function (resolve, reject) {
+            notification.uid = uuidv4();
+
+            notification.ts = Date.now().toString();
+
+            let params = {
+                TableName: config.aws.notifications_table,
+                Item: notification
             }
 
             docClient.put(params, function (err, res) {

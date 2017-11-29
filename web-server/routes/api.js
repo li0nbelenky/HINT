@@ -63,7 +63,6 @@ async function createNewHint(ctx) {
 
     let keys = ['user_id', 'user_department', 'title', 'description', 'status',
         'tags', 'followers', 'helper', 'helper_department'];
-
     if (!helper.validateObjectKeys(keys, hint, ctx)) {
         return;
     }
@@ -73,11 +72,11 @@ async function createNewHint(ctx) {
         await database.getUserByID(hint.user_id);
 
         await database.addNewHint(hint);
+
         ctx.body = {
             status: true,
             uid: hint.uid
         };
-
         ctx.status = 200;
     } catch (ex) {
         console.error(ex);
@@ -91,7 +90,6 @@ async function createNewUser(ctx) {
     let user = ctx.request.body;
 
     let keys = ['id', 'name', 'role', 'department', 'office_number'];
-
     if (!helper.validateObjectKeys(keys, user, ctx)) {
         return;
     }
@@ -105,7 +103,6 @@ async function createNewUser(ctx) {
                 status: true,
                 id: user.id
             };
-
             ctx.status = 200;
         } else {
             let errorResponse = 'User with id: ' + user.id + ' already exist!';
@@ -123,8 +120,40 @@ async function createNewUser(ctx) {
     }
 }
 
+async function createNewNotification(ctx) {
+    let notification = ctx.request.body;
+
+    let keys = ['user_id', 'hint_id', 'type'];
+    if (!helper.validateObjectKeys(keys, notification, ctx)) {
+        return;
+    }
+
+    try {
+        // check if user exists
+        await database.getUserByID(notification.user_id);
+
+        // check if hint exist
+       // await database.getHintByID(notification.hint_id);
+
+        await database.addNewNotification(notification);
+
+        ctx.body = {
+            status: true,
+            uid: notification.uid
+        };
+        ctx.status = 200;
+    } catch (ex) {
+        console.error(ex);
+
+        ctx.body = ex;
+        ctx.status = 400;
+    }
+}
+
 router.post('/hint/create', createNewHint);
 router.post('/user/create', createNewUser);
+router.post('/notification/create', createNewNotification)
+
 
 router.get('/feed', getFeedItems);
 router.post('/follow', addFollowerToHint);

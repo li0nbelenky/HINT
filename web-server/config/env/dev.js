@@ -7,7 +7,8 @@ module.exports = {
     aws: {
         region: 'eu-central-1',
         hints_table: 'hints',
-        users_table: 'users'
+        users_table: 'users',
+        notifications_table: 'notifications'
     },
 
     redis: {
