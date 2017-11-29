@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+import config from '../../config/config';
 import _ from 'lodash/fp';
 import axios from 'axios';
 import {
@@ -77,7 +79,7 @@ class AddHint extends Component {
       subtitle
     });
 
-    console.log('clicked a like');
+    console.log('added hint');
   }
 
   state = { open: false };
