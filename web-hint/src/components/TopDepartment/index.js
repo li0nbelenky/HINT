@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Chart from 'chart.js';
 import { HorizontalBar } from 'react-chartjs-2';
 import axios from 'axios';
+import config from './config';
 import _ from 'lodash';
 // console.log(Chart);
 
@@ -35,7 +36,7 @@ class TopDepartment extends Component {
   componentDidMount() {
     setInterval(() => {
       axios(
-        'http://localhost:8000/departments_impact'
+        `http://${config.WEBSERVER}:8000/departments_impact`
       ).then(departmentsData => {
         const { labels, data } = departmentsData;
         const changed = _.isEqual(

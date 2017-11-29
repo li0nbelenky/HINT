@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import _ from 'lodash';
+import config from './config';
 // console.log(Chart);
 
 const danielNeedToProvideMeWith = {
@@ -68,7 +69,7 @@ class TagTrends extends Component {
   componentDidMount() {
     setInterval(() => {
       axios(
-        'http://localhost:8000/departments_trends?status=open&department=supersonic&tags=nodejs,angular,python&time_range=3_month'
+        `http://${config.WEBSERVER}:8000/departments_trends?status=open&department=supersonic&tags=nodejs,angular,python&time_range=3_month`
       ).then(tagTrends => {
         // check if the trends have changed
 
