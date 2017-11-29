@@ -1,5 +1,5 @@
 database = require('./database');
-_ = require("lodash/fp");
+_ = require("lodash");
 
 const getDepartmentsImpact = async ()=> {
     let deps = await database.getDepartments();
@@ -53,23 +53,75 @@ const sortResults = function (results) {
             break
         }
     }
-    // console.log(data)
 
     return data
-
-// Create a new array with only the first 5 items
-//     console.log(items.slice(0, 5));
 }
+
+const getLast6Month = function () {
+    let month_list = [];
+    let date = new Date();
+    for (let i=0; i<6; i++) {
+        month_list.push(date.getMonth() - i);
+    }
+    return month_list
+}
+
+const getTagLast6MonthData = function(items, tag, labels) {
+    console.log(labels)
+
+    let data = []
+
+    labels.forEach(function(month){
+        data.push((_.filter(items, function(item) { return (ts_get_month(item.created_ts) === month && item.tags.indexOf(tag) > -1) })).length);
+    });
+
+    return data
+}
+
+const ts_get_month = function (ts) {
+    let date = new Date(parseInt(ts))
+    return date.getMonth()
+}
+
+const getHintsByTagDepStatus = async (tags, dep, status) => {
+    // let tags = ['test_1', "angular"]
+    return database.getHintsByTag(dep, status).then(function (res) {
+
+        let labels = getLast6Month();
+        let data = [];
+        for (let tag in tags) {
+            data.push({label: tags[tag], data: getTagLast6MonthData(res, tags[tag], labels)});
+        }
+
+        return {"labels": labels, "data": data};
+
+    })
+};
+
+
 
 module.exports = {
     getDepartmentsImpact,
-    sortResults
+    sortResults,
+    getHintsByTagDepStatus
 }
 
 // getDepartmentsImpact()
 
 // sortResults({ IC: 10, Infra: 25, Mobile: 20, Video: 40, Super: 100, Aura: 1 })
+// let tags = ['test_1', "angular"]
+// database.getHintsByTag('test', 'open').then(function (res) {
+//
+//     let labels = getLast6Month();
+//     let data = [];
+//     for (let tag in tags) {
+//         data.push({label: tags[tag], data: getTagLast6MonthData(res, tags[tag], labels)});
+//     }
+//
+//
+//     return {labels: labels, data: data};
+//
+//     console.log("labels", labels)
+//     console.log(data)
+// })
 
-database.getHintsByTag('test', 'open').then(function (data) {
-    console.log(data)
-})
