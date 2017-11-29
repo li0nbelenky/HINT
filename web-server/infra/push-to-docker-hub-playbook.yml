@@ -1,0 +1,16 @@
+---
+- hosts: local
+  vars:
+  tasks:
+  - debug:
+      msg: "pushing {{ image }}:{{ commit }} "
+  - name: pushing image
+    docker_image:
+      push: yes
+      name: "{{ image }}"
+      tag: "{{ commit }}"
+  - name: pushing image
+    docker_image:
+      push: yes
+      name: "{{ image }}"
+      tag: "{{ branch }}"

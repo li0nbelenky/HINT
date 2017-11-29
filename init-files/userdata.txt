@@ -10,6 +10,7 @@ aws s3 cp s3://hint-infra/authorized_keys /home/ubuntu/.ssh/authorized_keys
 aws s3 cp s3://hint-infra/start-services-master.sh /home/ubuntu
 aws s3 cp s3://hint-infra/start-services-staging.sh /home/ubuntu
 
+
 ### install Docker ###
 while :; do
     wget -qO- https://get.docker.com/ | sh
