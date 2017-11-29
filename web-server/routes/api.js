@@ -1,4 +1,3 @@
-'use strict';
 
 const Router = require('koa-router'),
       router = new Router(),
@@ -6,7 +5,9 @@ const Router = require('koa-router'),
       uuidv4 = require('uuid/v4'),
       redis = require('redis'),
 
-      config = require('../config/config');
+      config = require('../config/config'),
+      database = require('../database'),
+      helper = require('../helper');
 
 let redisClient = redis.createClient({
     host: config.redis.host,
@@ -43,13 +44,6 @@ const mockDB = [
 
 
 async function getFeedItems(ctx) {
-// ctx.body = {
-//   payload: [{title: 'Arie Belenky', subtitle: 'Software Developer'},
-//   {title: 'Zigi Bigule', subtitle: 'Software Engineer'}],
-// };
-// ctx.body = redisClient.hgetall((err, obj)=>{
-//     return obj;
-// });
     ctx.body = mockDB[Math.floor(Math.random() * 4)];
     ctx.status = 200;
 }
@@ -58,25 +52,50 @@ async function addFollowerToHint(ctx) {
     try {
         console.log('ctx.request.body');
         console.log(ctx.request.body);
-// validate all needed props were sent to the server
-// redisClient.set(ctx.request.body.hintId, ctx.request);
+
         ctx.status = 200;
     } catch (e) {
         ctx.status = 400;
     }
 }
 async function createNewHint(ctx) {
+    let hint = ctx.request.body;
+
+    let keys = ['user_id', 'user_department', 'title', 'description', 'status',
+        'tags', 'followers', 'helper', 'helper_department'];
+
+    if (!helper.validateObjectKeys(keys, hint, ctx)) {
+        return;
+    }
+
     try {
-        redisClient.set(ctx.request.body.hintId, ctx.request);
+        // check if user exists
+        await database.getUserByID(hint.user_id);
+
+        await database.addNewHint(hint);
+        ctx.body = {
+            status: true,
+            uid: hint.uid
+        };
+
         ctx.status = 200;
-    } catch (e) {
+    } catch (ex) {
+        console.error(ex);
+
+        ctx.body = ex;
         ctx.status = 400;
     }
+
 }
 
 router.get('/feed', getFeedItems);
 
-router.post('/createhint', createNewHint);
+router.post('/hint/create', createNewHint);
+
 router.post('/follow', addFollowerToHint);
+
+router.get('/latesthints', )
+
+
 
 module.exports = router;
