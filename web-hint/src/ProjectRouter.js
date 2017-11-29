@@ -17,6 +17,7 @@ const Home = () => (
 const ProjectRouter = () => (
   <Router>
     <div>
+    <h1> HELP is what I NEED, THANKS</h1>
       <ul>
         <li><Link to="/">Home</Link></li>
           <li><Link to="/trends">Trends</Link></li>
