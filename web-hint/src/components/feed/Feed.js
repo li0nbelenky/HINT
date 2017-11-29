@@ -3,7 +3,7 @@ import './Feed.css';
 import Hint from '../hint/Hint';
 import FeedConsumer from './FeedConsumer';
 import _ from 'lodash/fp';
-import { Feed as SemFeed, Icon } from 'semantic-ui-react';
+import { Feed as SemFeed, Icon, Button } from 'semantic-ui-react';
 
 class Feed extends Component {
   constructor() {
@@ -26,9 +26,12 @@ class Feed extends Component {
 
   render() {
     return (
-      <SemFeed>
-        {this.state.hints.map((item, index) => <Hint {...item} />)}
-      </SemFeed>
+      <div className="name">
+        <SemFeed>
+          {this.state.hints.map((item, index) => <Hint {...item} />)}
+        </SemFeed>
+        <Button onClick={console.log('i was clicked!')}>Add hint</Button>
+      </div>
     );
   }
 }
