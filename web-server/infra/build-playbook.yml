@@ -1,0 +1,16 @@
+---
+- hosts: local
+  vars:
+  tasks:
+  - debug:
+      msg: "building {{ image }}:{{ commit }} "
+  - name: building image
+    docker_image:
+      path: ../
+      name: "{{ image }}"
+      tag: "{{ commit }}"
+      buildargs:
+        GIT_COMMIT: "{{ commit }}"
+        NODE_ENV: "{{ branch }}"
+  - name: building image
+    shell: docker tag {{image}}:{{commit}} {{image}}:{{branch}}

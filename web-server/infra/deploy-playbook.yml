@@ -1,0 +1,12 @@
+---
+- hosts: "{{ hosts }}"
+  vars:
+  tasks:
+  - debug:
+      msg: "deploying to aws"
+  - name: pull new image
+    shell: docker pull {{image}}:{{commit}}
+  - name: delete container
+    shell: docker rm -f {{service}}
+  - name: start new container
+    shell: docker run -d -p 8000:8000 --network hintnet --name {{service}} {{image}}:{{commit}}
