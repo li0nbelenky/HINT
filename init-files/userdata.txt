@@ -7,8 +7,8 @@ sudo pip install awscli
 
 ## download keys ###
 aws s3 cp s3://hint-infra/authorized_keys /home/ubuntu/.ssh/authorized_keys
-aws s3 cp s3://hint-infra/start-services-master.sh /home/ubuntu
-aws s3 cp s3://hint-infra/start-services-staging.sh /home/ubuntu
+aws s3 cp s3://hint-infra/start-services-master.sh /home/ubuntu/infra/start-services-master.sh
+aws s3 cp s3://hint-infra/start-services-staging.sh /home/ubuntu/infra/start-services-staging.sh
 
 
 ### install Docker ###
@@ -27,6 +27,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 mkdir /home/ubuntu/infra
 cd /home/ubuntu/infra
+chmod +x start-services*
 
 ## Create HINT network ##
 docker network create hintnet
@@ -34,3 +35,5 @@ docker network create hintnet
 docker login -u ironsrcci -p 6f3TqGoqmj
 addgroup ubuntu docker
 sudo usermod -a -G docker ubuntu
+
+sudo su ubuntu -c /home/ubuntu/infra/start-services-staging.sh
