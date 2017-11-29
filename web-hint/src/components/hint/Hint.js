@@ -3,7 +3,7 @@ import axios from 'axios';
 import NewActivity from '../FeedActivityItems/NewActivity';
 import FrogMatchActivity from '../FeedActivityItems/FrogMatchActivity';
 import ResolvedActivity from '../FeedActivityItems/ResolvedActivity';
-import config from '../config';
+import config from '../../config/config';
 
 
 class Hint extends Component {

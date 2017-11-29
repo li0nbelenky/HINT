@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import config from './config';
+import config from '../../config/config';
 import { Feed as SemFeed, Card, Icon, Image } from 'semantic-ui-react';
 
 class ResolvedActivity extends Component {

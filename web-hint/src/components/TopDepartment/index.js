@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Chart from 'chart.js';
 import { HorizontalBar } from 'react-chartjs-2';
 import axios from 'axios';
-import config from './config';
+import config from '../../config/config';
 import _ from 'lodash';
 // console.log(Chart);
 

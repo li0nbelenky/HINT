@@ -1,5 +1,5 @@
 import request from 'request';
-import config from './config';
+import config from '../../config/config';
 
 
 const myArray = [{title: 'Arie Belenky', subtitle: 'Software Developer'},

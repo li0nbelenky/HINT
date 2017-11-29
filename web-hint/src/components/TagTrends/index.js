@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import _ from 'lodash';
-import config from './config';
+import config from '../../config/config';
 // console.log(Chart);
 
 const danielNeedToProvideMeWith = {
