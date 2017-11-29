@@ -147,5 +147,48 @@ module.exports = {
                 }
             });
         });
-    }
+    },
+
+    getDepartments : function () {
+        // console.log(config.AWS.REGION)
+        return new Promise(function(resolve, reject) {
+            let params = {
+                TableName: config.AWS.DEPARTMENTS_TABLE,
+                Key: {
+
+                }
+            };
+
+            docClient.scan(params, function(err, data) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(data)
+                }
+            });
+        });
+    },
+
+    getHintsByHelperDep : function (dep) {
+        // console.log(dep)
+        return new Promise(function(resolve, reject) {
+            let params = {
+                TableName: config.AWS.HINTS_TABLE,
+
+                FilterExpression: "#helper_dep = :helper_dep and #status= :status",
+                ExpressionAttributeNames: {
+                    "#helper_dep": "helper_dep",
+                    "#status": "status",
+                },
+                ExpressionAttributeValues: { ":helper_dep": dep, ":status": "closed" }
+            };
+
+            docClient.scan(params, function(err, data) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(data['Items'])
+                }
+            });
+        });
 }
