@@ -203,8 +203,12 @@ module.exports = {
                     "#user_department": "user_department",
                     "#status": "status",
                 },
-                ExpressionAttributeValues: {":user_department": dep, ":status": status}
+                ExpressionAttributeValues: {":status": status},
             };
+
+            if (dep !== '*'){
+                params['ExpressionAttributeValues'][':user_department'] = dep
+            }
 
             docClient.scan(params, function (err, data) {
                 if (err) {

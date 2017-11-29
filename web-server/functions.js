@@ -45,9 +45,13 @@ const sortResults = function (results) {
     });
 
     for (let i in items){
-        // console.log(items[i])
-        data['labels'] = data['labels'].concat(items[i][0])
-        data['data'] = data['data'].concat(items[i][1])
+        if (count > 0) {
+            data['labels'] = data['labels'].concat(items[i][0])
+            data['data'] = data['data'].concat(items[i][1])
+            count -= 1;
+        }else{
+            break
+        }
     }
     // console.log(data)
 
