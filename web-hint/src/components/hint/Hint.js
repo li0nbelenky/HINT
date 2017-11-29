@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Feed as SemFeed, Card, Icon, Image} from 'semantic-ui-react';
+import { Feed as SemFeed, Card, Icon, Image } from 'semantic-ui-react';
 
 class Hint extends Component {
   render() {
@@ -7,7 +7,7 @@ class Hint extends Component {
       <div className="Hint">
         <SemFeed.Event>
           {/*<SemFeed.Label>*/}
-            {/*<img src='/assets/images/avatar/small/elliot.jpg' />*/}
+          {/*<img src='/assets/images/avatar/small/elliot.jpg' />*/}
           {/*</SemFeed.Label>*/}
           <SemFeed.Content>
             <SemFeed.Summary>
@@ -16,7 +16,7 @@ class Hint extends Component {
             </SemFeed.Summary>
             <SemFeed.Meta>
               <SemFeed.Like>
-                <Icon name='like' />
+                <Icon name="like" />
                 4 Likes
               </SemFeed.Like>
             </SemFeed.Meta>
