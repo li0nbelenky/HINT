@@ -73,10 +73,7 @@ class AddHint extends Component {
     console.log(this.props);
 
     const { title, id, subtitle } = this.props;
-    let res = axios.post(`http://${config.WEBSERVER}:8000/hint/create`, {
-      title,
-      id,
-      subtitle
+    let res = axios.post(`http://${config.WEBSERVER}:8000/hint/create`, { ...this.state
     });
 
     console.log('added hint');
