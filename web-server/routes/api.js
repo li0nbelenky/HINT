@@ -58,6 +58,14 @@ async function addFollowerToHint(ctx) {
         ctx.status = 400;
     }
 }
+
+async function health(ctx) {
+    ctx.body = {
+        status: true
+    };
+    ctx.status = 200;
+}
+
 async function createNewHint(ctx) {
     let hint = ctx.request.body;
 
@@ -133,7 +141,7 @@ async function createNewNotification(ctx) {
         await database.getUserByID(notification.user_id);
 
         // check if hint exist
-       // await database.getHintByID(notification.hint_id);
+        await database.getHintByID(notification.hint_id);
 
         await database.addNewNotification(notification);
 
@@ -149,6 +157,8 @@ async function createNewNotification(ctx) {
         ctx.status = 400;
     }
 }
+
+router.get('/health', health);
 
 router.post('/hint/create', createNewHint);
 router.post('/user/create', createNewUser);
