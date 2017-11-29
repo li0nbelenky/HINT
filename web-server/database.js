@@ -137,7 +137,7 @@ module.exports = {
             let params = {
                 TableName: config.aws.notifications_table,
                 Item: notification
-            }
+            };
 
             docClient.put(params, function (err, res) {
                 if (err) {
@@ -146,6 +146,40 @@ module.exports = {
                     resolve(res);
                 }
             });
+        });
+    },
+
+    getNotificationsByUserID: function (userID) {
+        return new Promise(function (resolve, reject) {
+            let params = {
+                TableName: config.aws.notifications_table,
+                FilterExpression: "#user_id = :user_id",
+                ExpressionAttributeNames: {
+                    "#user_id": "user_id"
+                },
+                ExpressionAttributeValues: {
+                    ":user_id": userID
+                }
+            };
+
+            let resultData = []
+            function onScan(err, data) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resultData = resultData.concat(data['Items']);
+
+                    if (typeof data.LastEvaluatedKey != "undefined") {
+                        console.log("Scanning for more...");
+                        params.ExclusiveStartKey = data.LastEvaluatedKey;
+                        docClient.scan(params, onScan);
+                    } else {
+                        resolve(resultData);
+                    }
+                }
+            }
+
+            docClient.scan(params, onScan);
         });
     },
 
@@ -218,5 +252,5 @@ module.exports = {
                 }
             });
         });
-    },
+    }
 }
