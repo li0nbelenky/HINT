@@ -5,8 +5,8 @@
   - debug:
       msg: "deploying to aws"
   - name: pull new image
-    shell: docker pull {{image}}:{{commit}}
+    shell: docker pull {{image}}:{{branch}}
   - name: delete container
     shell: docker rm -f {{service}}
   - name: start new container
-    shell: docker run -d -p 8000:8000 --network hintnet --name {{service}} {{image}}:{{commit}}
+    shell: docker run -d -p 8000:8000 --name {{service}} {{image}}:{{branch}}
