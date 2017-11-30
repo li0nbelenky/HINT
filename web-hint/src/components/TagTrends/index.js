@@ -88,44 +88,8 @@ class TagTrends extends Component {
       data: mockData
     };
   }
-  componentWillUnmount() {
-    clearInterval(this.intervalId);
-  }
-  componentDidMount() {
-    this.intervalId = setInterval(() => {
-      axios(
-        `http://${config.WEBSERVER}:8000/departments_trends?status=open&department=supersonic&tags=nodejs,angular,python&time_range=3_month`
-      ).then(tagTrends => {
-        // check if the trends have changed
-
-        const changed = _.isEqual(
-          [...tagTrends].sort(),
-          [...this.state.data].sort()
-        );
-        const { labels, data } = tagTrends;
-        changed
-          ? this.setState({
-              ...this.state,
-              data: {
-                labels: labels,
-                datasets: [
-                  {
-                    label: data.label,
-                    fill: false,
-                    backgroundColor: 'rgba(255,99,132,0.2)',
-                    borderColor: 'rgba(255,99,132,1)',
-                    borderWidth: 1,
-                    hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                    hoverBorderColor: 'rgba(255,99,132,1)',
-                    data: data
-                  }
-                ]
-              }
-            })
-          : null;
-      });
-    }, 10000);
-  }
+  componentWillUnmount() {}
+  componentDidMount() {}
   render() {
     return (
       <div>
