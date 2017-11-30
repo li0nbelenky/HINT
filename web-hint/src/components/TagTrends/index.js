@@ -37,25 +37,25 @@ const mockData = {
       data: [160, 150, 100, 50, 56, 55, 40]
     },
     {
-        label: 'docker',
-        fill: false,
-        lineTension: 0.1,
-        backgroundColor: 'rgba(226,64,64,0.4)',
-        borderColor: 'rgba(226,64,64,1)',
-        borderCapStyle: 'butt',
-        borderDash: [],
-        borderDashOffset: 0.0,
-        borderJoinStyle: 'miter',
-        pointBorderColor: 'rgba(226,64,64,1)',
-        pointBackgroundColor: '#fff',
-        pointBorderWidth: 1,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: 'rgba(226,64,64,1)',
-        pointHoverBorderColor: 'rgba(220,220,220,1)',
-        pointHoverBorderWidth: 2,
-        pointRadius: 1,
-        pointHitRadius: 10,
-        data: [55, 70, 80, 90, 100, 105, 110]
+      label: 'docker',
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: 'rgba(226,64,64,0.4)',
+      borderColor: 'rgba(226,64,64,1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(226,64,64,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(226,64,64,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: [55, 70, 80, 90, 100, 105, 110]
     },
     {
       label: 'react',
@@ -88,44 +88,8 @@ class TagTrends extends Component {
       data: mockData
     };
   }
-  componentWillUnmount() {
-    clearInterval(this.intervalId);
-  }
-  componentDidMount() {
-    this.intervalId = setInterval(() => {
-      axios(
-        `http://${config.WEBSERVER}:8000/departments_trends?status=open&department=supersonic&tags=nodejs,angular,python&time_range=3_month`
-      ).then(tagTrends => {
-        // check if the trends have changed
-
-        const changed = _.isEqual(
-          [...tagTrends].sort(),
-          [...this.state.data].sort()
-        );
-        const { labels, data } = tagTrends;
-        changed
-          ? this.setState({
-              ...this.state,
-              data: {
-                labels: labels,
-                datasets: [
-                  {
-                    label: data.label,
-                    fill: false,
-                    backgroundColor: 'rgba(255,99,132,0.2)',
-                    borderColor: 'rgba(255,99,132,1)',
-                    borderWidth: 1,
-                    hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                    hoverBorderColor: 'rgba(255,99,132,1)',
-                    data: data
-                  }
-                ]
-              }
-            })
-          : null;
-      });
-    }, 1000);
-  }
+  componentWillUnmount() {}
+  componentDidMount() {}
   render() {
     return (
       <div>
