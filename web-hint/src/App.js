@@ -14,12 +14,7 @@ class App extends Component {
           <Grid.Column className="centered" width={6}>
             <Feed />
           </Grid.Column>
-          <Grid.Column
-            className="right floated"
-            width={3}
-            floated={true}
-            right={true}
-          >
+          <Grid.Column className="right floated" width={3}>
             <Segment>
               <TopTables />
             </Segment>

@@ -15,7 +15,6 @@ class Feed extends Component {
   componentDidMount() {
     setInterval(() => {
       FeedConsumer.getFeedItems().then(feedItems => {
-        console.log(feedItems);
         const currentHints = _.sortBy('title')(this.state.hints);
         _.isEqual(feedItems.activities)(currentHints)
           ? null
