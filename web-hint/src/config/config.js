@@ -3,7 +3,7 @@ const env = process.env.NODE_ENV || 'development';
 if (env === 'master' || env === 'staging') {
   var config = {
     config: {
-      WEBSERVER: 'web-server'
+      WEBSERVER: 'localhost'
     }
   };
 } else {
