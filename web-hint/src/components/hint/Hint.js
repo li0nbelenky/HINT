@@ -5,7 +5,6 @@ import FrogMatchActivity from '../FeedActivityItems/FrogMatchActivity';
 import ResolvedActivity from '../FeedActivityItems/ResolvedActivity';
 import config from '../../config/config';
 
-
 class Hint extends Component {
   constructor(props) {
     super(props);
@@ -13,9 +12,8 @@ class Hint extends Component {
   }
 
   async handleClick() {
-    console.log(this.props.title);
     const { title, id, subtitle } = this.props;
-    let res = axios.post(`http://${config.WEBSERVER}:8000/follow`, {
+    axios.post(`http://${config.WEBSERVER}:8000/follow`, {
       title,
       id,
       subtitle
@@ -24,15 +22,15 @@ class Hint extends Component {
     console.log('Clicked a Follow');
   }
   render() {
-      if (this.props.action === 'New hint') {
-        return <NewActivity key={this.props.id} {...this.props} />
-      } else if (this.props.action === 'Frog match') {
-          return <FrogMatchActivity key={this.props.id} {...this.props} />
-      } else if (this.props.action === 'Resolved') {
-          return <ResolvedActivity key={this.props.id} {...this.props} />
-      } else {
-          return <div>Unknown type of Activity</div>
-      }
+    if (this.props.action === 'New hint') {
+      return <NewActivity key={this.props.id} {...this.props} />;
+    } else if (this.props.action === 'Frog match') {
+      return <FrogMatchActivity key={this.props.id} {...this.props} />;
+    } else if (this.props.action === 'Resolved') {
+      return <ResolvedActivity key={this.props.id} {...this.props} />;
+    } else {
+      return <div>Unknown type of Activity</div>;
+    }
   }
 }
 

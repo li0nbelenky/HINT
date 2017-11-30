@@ -15,22 +15,23 @@ class Feed extends Component {
   componentDidMount() {
     setInterval(() => {
       FeedConsumer.getFeedItems().then(feedItems => {
-        feedItems = _.sortBy('title')(feedItems.payload);
         const currentHints = _.sortBy('title')(this.state.hints);
-        _.isEqual(feedItems)(currentHints)
+        _.isEqual(feedItems.activities)(currentHints)
           ? null
-          : this.setState({ hints: feedItems });
+          : this.setState({ hints: feedItems.activities });
       });
     }, 1000);
   }
 
   render() {
+    const hints = this.state.hints || [];
     return (
       <div className="name">
         <SemFeed>
-          {this.state.hints.map((item, index) => (
-            <Hint key={item.id} {...item} />
-          ))}
+          {hints.map((item, index) => {
+            let myfollowers = item.followers || [];
+            return <Hint key={item.id} followers={myfollowers} {...item} />;
+          })}
         </SemFeed>
       </div>
     );
