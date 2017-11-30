@@ -56,7 +56,7 @@ class Notification extends Component {
     );
 
     return (
-      <div>
+      <div className={"notification-wrapper"}>
         <Popup
           header="Notifications"
           trigger={trigger}
@@ -64,10 +64,6 @@ class Notification extends Component {
           on="click"
         />
       </div>
-
-      // {/*<div className="notification">*/}
-      //   {/*{this.state.notifications}*/}
-      // {/*</div>*/}
     );
   }
 
