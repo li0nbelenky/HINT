@@ -1,33 +1,56 @@
-ul {
-    list-style-type: none;
-    padding-left:0;
+.notification-trigger button.ui.circular.icon{
+    font-size: 2em;
+    padding: 0;
+    background-color: transparent;
+}
+.ui.floating.label{
+    min-width: 22px;
+    min-height: 20px;
+    padding: 5px;
+    font-size: 10px;
+    top: 3em;
+    left: 2em;
+}
+.notification-trigger .ui.floating.label:hover{
+    background-color: transparent;
 }
 
-.Feed {
-    text-align: center;
+.ui.popup{
+    min-width: 350px;
+    padding-right: 0;
+    padding-left: 0;
 }
 
-.Feed-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 80px;
+.ui.popup > .header{
+    padding-left: 10px;
+    border-bottom: 1px solid;
+    padding-bottom: 10px;
 }
 
-.Feed-header {
-    background-color: #222;
-    height: 150px;
-    padding: 20px;
-    color: white;
+.list.notifications-list{
+    overflow-y: auto;
+    max-height: 260px;
+    margin-top: 0;
 }
 
-.Feed-title {
-    font-size: 1.5em;
+
+.list .item{
+    border-bottom: 1px solid;
+    padding: 10px !important;
 }
 
-.Feed-intro {
-    font-size: large;
+.list .item .ui.basic.floating.label{
+    position: relative;
+    left: -20px;
+    top: 0;
 }
 
-@keyframes Feed-logo-spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+.list .item .content{
+    max-width: 240px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.list .item .image{
+    width: 48px;
+    height: 48px;
 }
