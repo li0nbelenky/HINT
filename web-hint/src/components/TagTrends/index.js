@@ -34,10 +34,32 @@ const mockData = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [65, 59, 80, 81, 56, 55, 40]
+      data: [160, 150, 100, 50, 56, 55, 40]
+    },
+    {
+        label: 'docker',
+        fill: false,
+        lineTension: 0.1,
+        backgroundColor: 'rgba(226,64,64,0.4)',
+        borderColor: 'rgba(226,64,64,1)',
+        borderCapStyle: 'butt',
+        borderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: 'miter',
+        pointBorderColor: 'rgba(226,64,64,1)',
+        pointBackgroundColor: '#fff',
+        pointBorderWidth: 1,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: 'rgba(226,64,64,1)',
+        pointHoverBorderColor: 'rgba(220,220,220,1)',
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data: [55, 70, 80, 90, 100, 105, 110]
     },
     {
       label: 'react',
+      fill: false,
       lineTension: 0.1,
       backgroundColor: 'rgba(12,192,120,0.4)',
       borderColor: 'rgba(75,100,192,1)',
@@ -46,7 +68,7 @@ const mockData = {
       borderDashOffset: 0.0,
       borderJoinStyle: 'miter',
       pointBorderColor: 'rgba(75,170,192,1)',
-      pointBackgroundColor: '#fdf',
+      pointBackgroundColor: '#fff',
       pointBorderWidth: 1,
       pointHoverRadius: 5,
       pointHoverBackgroundColor: 'rgba(75,192,192,1)',
@@ -54,7 +76,7 @@ const mockData = {
       pointHoverBorderWidth: 2,
       pointRadius: 1,
       pointHitRadius: 10,
-      data: [65, 30, 80, 20, 70, 55, 10]
+      data: [80, 75, 90, 85, 70, 80, 85]
     }
   ]
 };
@@ -89,6 +111,7 @@ class TagTrends extends Component {
                 datasets: [
                   {
                     label: data.label,
+                    fill: false,
                     backgroundColor: 'rgba(255,99,132,0.2)',
                     borderColor: 'rgba(255,99,132,1)',
                     borderWidth: 1,
