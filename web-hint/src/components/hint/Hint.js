@@ -22,7 +22,7 @@ class Hint extends Component {
     console.log('Clicked a Follow');
   }
   render() {
-    if (this.props.action === 'New hint') {
+    if (this.props.action === 'New hint' || this.props.action === 'New hint created') {
       return <NewActivity key={this.props.id} {...this.props} />;
     } else if (this.props.action === 'Frog match') {
       return <FrogMatchActivity key={this.props.id} {...this.props} />;

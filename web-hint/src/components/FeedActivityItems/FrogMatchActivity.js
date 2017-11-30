@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import config from '../../config/config';
-import { Feed as SemFeed, Card, Icon, Image } from 'semantic-ui-react';
+import { Feed as SemFeed ,Label} from 'semantic-ui-react';
 
 class FrogMatchActivity extends Component {
   constructor(props) {
@@ -9,6 +9,7 @@ class FrogMatchActivity extends Component {
     super(props);
     console.log(props);
     console.log('frog activity');
+    this.tags = props.tags || [];
 
     this.handleClick = this.handleClick.bind(this);
   }
@@ -35,12 +36,16 @@ class FrogMatchActivity extends Component {
             <SemFeed.Summary>
               Froggy with id of {this.props.helper_id} from{' '}
               <SemFeed.User>{this.props.helper_dep}</SemFeed.User> was matched
-              to help <SemFeed.User>{this.props.user_id}</SemFeed.User>'s hint
+              to help <SemFeed.User>{this.props.fullName}</SemFeed.User>'s hint
               <SemFeed.Date>{this.props.updated_ts}</SemFeed.Date>
             </SemFeed.Summary>
-            <SemFeed.Extra text>{this.props.description}</SemFeed.Extra>
+            <SemFeed.Extra text>{this.props.hintTitle}</SemFeed.Extra>
           </SemFeed.Content>
         </SemFeed.Event>
+          {
+              this.tags.map((item, index) =>
+              {return <Label as='a' color='teal' tag> {item} </Label>})
+          }
       </div>
     );
   }

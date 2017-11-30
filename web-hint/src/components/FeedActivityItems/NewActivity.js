@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import config from '../../config/config';
-import { Feed as SemFeed, Card, Icon, Image, Item } from 'semantic-ui-react';
+import { Feed as SemFeed, Label, Card, Icon, Image, Item } from 'semantic-ui-react';
 
 class NewActivity extends Component {
   constructor(props) {
@@ -10,6 +10,7 @@ class NewActivity extends Component {
     console.log('this.props new activity');
     console.log(props);
     console.log('this.props new activity');
+    this.tags = props.tags || [];
   }
 
   async handleClick() {
@@ -35,11 +36,11 @@ class NewActivity extends Component {
           </SemFeed.Label>
           <SemFeed.Content>
             <SemFeed.Summary>
-              <SemFeed.User>{this.props.user_id}</SemFeed.User> Created a
+              <SemFeed.User>{this.props.fullName}</SemFeed.User> Created a
               new HINT
               <SemFeed.Date>{this.props.created_ts}</SemFeed.Date>
             </SemFeed.Summary>
-            <SemFeed.Extra text>{this.props.description}</SemFeed.Extra>
+            <SemFeed.Extra text>{this.props.hintTitle}</SemFeed.Extra>
             {/* <SemFeed.Meta onClick={this.handleClick}> */}
             {/*   <SemFeed.Like> */}
             {/*     <Icon name="bell outline" /> */}
@@ -48,6 +49,10 @@ class NewActivity extends Component {
             {/* </SemFeed.Meta> */}
           </SemFeed.Content>
         </SemFeed.Event>
+          {
+              this.tags.map((item, index) =>
+              {return <Label as='a' color='teal' tag> {item} </Label>})
+          }
       </div>
     );
   }

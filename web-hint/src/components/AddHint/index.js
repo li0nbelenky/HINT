@@ -75,6 +75,7 @@ class AddHint extends Component {
     const { title, id, subtitle } = this.props;
     let res = axios.post(`http://${config.WEBSERVER}:8000/hint/create`, { ...this.state
     });
+    this.close();
 
     console.log('added hint');
   }
@@ -166,7 +167,7 @@ class AddHint extends Component {
             </Form>
           </Modal.Content>
           <Modal.Actions>
-            <Button type="submit" form="myform">
+            <Button type="submit" form="myform" positive>
               Submit
             </Button>
           </Modal.Actions>
