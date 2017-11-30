@@ -211,7 +211,7 @@ module.exports = {
 
         return new Promise(function(resolve, reject) {
             let params = {
-                TableName: config.aws.activities,
+                TableName: config.aws.activities_table,
                 Key: {
 
                 }
