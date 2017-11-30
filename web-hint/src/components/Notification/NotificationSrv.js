@@ -1,4 +1,6 @@
 import request from "request";
+import config from '../../config/config';
+
 
 const promisifiedRequest = (url, method, obj) => {
   return new Promise( (resolve, reject) => {
@@ -51,7 +53,7 @@ const promisifiedRequest = (url, method, obj) => {
 
 class NotificationSrv {
   static getUserNotifications(userID) {
-    return promisifiedRequest("http://localhost:8000/notification/" + userID, "GET")
+    return promisifiedRequest(`http://${config.WEBSERVER}:8000/notification/` + userID, "GET")
       .then( (data) => {
         return data.notifications;
       })
