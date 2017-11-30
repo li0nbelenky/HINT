@@ -28,8 +28,10 @@ class ResolvedActivity extends Component {
           </SemFeed.Label>
           <SemFeed.Content>
             <SemFeed.Summary>
-              <SemFeed.User>{this.props.helper_full_name}</SemFeed.User> Help
-              resolve <SemFeed.User>{this.props.user_full_name}</SemFeed.User>'s
+              <SemFeed.User>
+                {this.props.helper_full_name || 'John Doe'}
+              </SemFeed.User>{' '}
+              Helped resolve <SemFeed.User>{this.props.user_id}</SemFeed.User>'s
               hint, and is now a prince!
               <SemFeed.Date>{this.props.updated_ts}</SemFeed.Date>
             </SemFeed.Summary>

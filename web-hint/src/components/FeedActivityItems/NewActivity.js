@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import config from '../../config/config';
-import { Feed as SemFeed, Card, Icon, Image, Item } from 'semantic-ui-react';
+import { Feed as SemFeed } from 'semantic-ui-react';
 
 class NewActivity extends Component {
   constructor(props) {
@@ -35,8 +35,8 @@ class NewActivity extends Component {
           </SemFeed.Label>
           <SemFeed.Content>
             <SemFeed.Summary>
-              <SemFeed.User>{this.props.user_full_name}</SemFeed.User> Created a
-              new HINT
+              <SemFeed.User>{this.props.user_id}</SemFeed.User> Created a new
+              HINT
               <SemFeed.Date>{this.props.created_ts}</SemFeed.Date>
             </SemFeed.Summary>
             <SemFeed.Extra text>{this.props.description}</SemFeed.Extra>

@@ -10,10 +10,10 @@ const danielNeedsToGiveMeThisForTopDepartments = {
   data: [65, 59, 80, 81, 56, 55, 40]
 };
 const data = {
-  labels: ['search', 'mobile', 'installCore', 'April', 'May', 'June', 'July'],
+  labels: ['Search', 'Mobile', 'InstallCore', 'Aura', 'BI', 'Video'],
   datasets: [
     {
-      label: 'My First dataset',
+      label: 'Departments impact',
       backgroundColor: 'rgba(255,99,132,0.2)',
       borderColor: 'rgba(255,99,132,1)',
       borderWidth: 1,
