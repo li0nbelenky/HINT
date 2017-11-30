@@ -1,0 +1,56 @@
+.notification-trigger button.ui.circular.icon{
+    font-size: 2em;
+    padding: 0;
+    background-color: transparent;
+}
+.ui.floating.label{
+    min-width: 22px;
+    min-height: 20px;
+    padding: 5px;
+    font-size: 10px;
+    top: 3em;
+    left: 2em;
+}
+.notification-trigger .ui.floating.label:hover{
+    background-color: transparent;
+}
+
+.ui.popup{
+    min-width: 350px;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.ui.popup > .header{
+    padding-left: 10px;
+    border-bottom: 1px solid;
+    padding-bottom: 10px;
+}
+
+.list.notifications-list{
+    overflow-y: auto;
+    max-height: 260px;
+    margin-top: 0;
+}
+
+
+.list .item{
+    border-bottom: 1px solid;
+    padding: 10px !important;
+}
+
+.list .item .ui.basic.floating.label{
+    position: relative;
+    left: -20px;
+    top: 0;
+}
+
+.list .item .content{
+    max-width: 240px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.list .item .image{
+    width: 48px;
+    height: 48px;
+}
