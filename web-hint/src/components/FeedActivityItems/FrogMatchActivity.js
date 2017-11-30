@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import config from '../../config/config';
 import { Feed as SemFeed, Card, Icon, Image } from 'semantic-ui-react';
 
 class FrogMatchActivity extends Component {
@@ -11,7 +12,7 @@ class FrogMatchActivity extends Component {
     async handleClick() {
         console.log(this.props.title);
         const { title, id, subtitle } = this.props;
-        let res = axios.post('http://localhost:8000/follow', {
+        let res = axios.post(`http://${config.WEBSERVER}:8000/follow`, {
             title,
             id,
             subtitle
@@ -23,9 +24,9 @@ class FrogMatchActivity extends Component {
         return (
             <div className="FrogMatchActivity">
                 <SemFeed.Event>
-                    {/*<SemFeed.Label>*/}
-                    {/*<img src='/assets/images/avatar/small/elliot.jpg' />*/}
-                    {/*</SemFeed.Label>*/}
+                    <SemFeed.Label>
+                        <img src='./elliot.jpg' />
+                    </SemFeed.Label>
                     <SemFeed.Content>
                         <SemFeed.Summary>
                             <SemFeed.User>{this.props.helper_full_name}</SemFeed.User> Froggy was matched to help <SemFeed.User>{this.props.user_full_name}</SemFeed.User>'s hint
@@ -36,7 +37,7 @@ class FrogMatchActivity extends Component {
                         </SemFeed.Extra>
                         <SemFeed.Meta onClick={this.handleClick}>
                             <SemFeed.Like>
-                                <Icon name="Follow" />
+                                <Icon name="bell outline" />
                                 {this.props.followers.length} Followers
                             </SemFeed.Like>
                         </SemFeed.Meta>

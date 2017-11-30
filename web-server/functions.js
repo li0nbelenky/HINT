@@ -61,9 +61,51 @@ const sortResults = function (results) {
 //     console.log(items.slice(0, 5));
 }
 
+const getLast6Month = function () {
+    let month_list = [];
+    let date = new Date();
+    for (let i=0; i<6; i++) {
+        month_list.push(date.getMonth() - i);
+    }
+    return month_list
+}
+
+const getTagLast6MonthData = function(items, tag, labels) {
+    console.log(labels)
+
+    let data = []
+
+    labels.forEach(function(month){
+        data.push((_.filter(items, function(item) { return (ts_get_month(item.created_ts) === month && item.tags.indexOf(tag) > -1) })).length);
+    });
+
+    return data
+}
+
+const ts_get_month = function (ts) {
+    let date = new Date(parseInt(ts))
+    return date.getMonth()
+}
+
+const getHintsByTagDepStatus = async (tags, dep, status) => {
+    // let tags = ['test_1', "angular"]
+    return database.getHintsByTag(dep, status).then(function (res) {
+
+        let labels = getLast6Month();
+        let data = [];
+        for (let tag in tags) {
+            data.push({label: tags[tag], data: getTagLast6MonthData(res, tags[tag], labels)});
+        }
+
+        return {"labels": labels, "data": data};
+
+    })
+};
+
 module.exports = {
     getDepartmentsImpact,
-    sortResults
+    sortResults,
+    getHintsByTagDepStatus
 }
 
 // getDepartmentsImpact()

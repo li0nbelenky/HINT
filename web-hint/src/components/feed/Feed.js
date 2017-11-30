@@ -18,7 +18,7 @@ class Feed extends Component {
         feedItems = _.sortBy('title')(feedItems.payload);
         const currentHints = _.sortBy('title')(this.state.hints);
         _.isEqual(feedItems)(currentHints)
-          ? console.log('no change')
+          ? null
           : this.setState({ hints: feedItems });
       });
     }, 1000);
@@ -28,9 +28,9 @@ class Feed extends Component {
     return (
       <div className="name">
         <SemFeed>
-            {this.state.hints.map((item, index) => (
-                <Hint key={item.id} {...item} />
-            ))}
+          {this.state.hints.map((item, index) => (
+            <Hint key={item.id} {...item} />
+          ))}
         </SemFeed>
       </div>
     );
