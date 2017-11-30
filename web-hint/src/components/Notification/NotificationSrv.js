@@ -15,6 +15,16 @@ const promisifiedRequest = (url, method, obj) => {
     //   }
     // });
 
+    // full_name
+    // role
+    // profile_pic
+    // department
+    // office_number
+    // open_hints (number)
+    // resolved_hints (list of hint ids)
+    // score
+
+
     return resolve({
       "status": true,
       "user_id": "test@test.com",

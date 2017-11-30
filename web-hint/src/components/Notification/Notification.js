@@ -38,17 +38,39 @@ class Notification extends Component {
       </span>
     );
 
+    function ConfirmBtn() {
+      return <Button basic color="green"
+              className={"confirm-help"}
+              floated="right"
+      >Confirm
+      </Button>
+    };
+
+    function ResolveData() {
+      return <Label floating>{Math.floor(Math.random() * 60)} min ago</Label>
+    };
+
+    function NotificationType(props) {
+      let notificationType = props.item.type;
+      if (notificationType === "suggest_help"){
+        return <ConfirmBtn />;
+      }
+      if (notificationType === "resolved"){
+        return <ResolveData />;
+      }
+    }
+
     let content = (
       <List className="notifications-list">
         {this.state.items.map( item => (
           <List.Item>
             <Image avatar src={DefAvatar} />
-            <Label color="orange" basic circular floating>{this.state.items.length}</Label>
+            <Label color="orange" basic circular floating>{item.hint_id.slice(0, 2)}</Label>
             <List.Content>
-              <List.Header as="a">User Name</List.Header>
+              <List.Header as="span"><b>{item.user_id}</b></List.Header>
               <List.Description>{item.hint_id}.</List.Description>
             </List.Content>
-            <Checkbox/>
+            <NotificationType item={item} />
           </List.Item>
           )
         )}
