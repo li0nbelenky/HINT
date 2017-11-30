@@ -35,12 +35,6 @@ class FrogMatchActivity extends Component {
                         <SemFeed.Extra text>
                             {this.props.description}
                         </SemFeed.Extra>
-                        <SemFeed.Meta onClick={this.handleClick}>
-                            <SemFeed.Like>
-                                <Icon name="bell outline" />
-                                {this.props.followers.length} Followers
-                            </SemFeed.Like>
-                        </SemFeed.Meta>
                     </SemFeed.Content>
                 </SemFeed.Event>
             </div>

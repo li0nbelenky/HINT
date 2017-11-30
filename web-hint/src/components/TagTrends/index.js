@@ -66,8 +66,11 @@ class TagTrends extends Component {
       data: mockData
     };
   }
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
+  }
   componentDidMount() {
-    setInterval(() => {
+    this.intervalId = setInterval(() => {
       axios(
         `http://${config.WEBSERVER}:8000/departments_trends?status=open&department=supersonic&tags=nodejs,angular,python&time_range=3_month`
       ).then(tagTrends => {

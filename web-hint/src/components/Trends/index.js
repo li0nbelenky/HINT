@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import { Chart } from 'chart.js';
-// import { Line } from 'react-chartjs';
 import TopDepartment from '../TopDepartment';
 import TagTrends from '../TagTrends';
 const data = {
@@ -46,7 +44,6 @@ class Trends extends Component {
   render() {
     return (
       <div className="Trends">
-        {/* <Line data={data} /> */}
         <h1>Trends</h1>
         <TopDepartment />
         <TagTrends/>
