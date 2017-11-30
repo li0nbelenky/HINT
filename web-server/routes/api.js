@@ -171,13 +171,13 @@ async function createNewHint(ctx) {
   console.log(hint);
 
   let keys = [
-    'Department',
+    'user_department',
     'title',
     'description',
     'hintTitle',
     'email',
-    'Position',
-    'fullName',
+    'position',
+    'user_full_name',
 
     // 'status',
     'tags',
@@ -185,13 +185,13 @@ async function createNewHint(ctx) {
   //   'helper',
   //   'helper_department'
   ];
-  if (!helper.validateObjectKeys(keys, hint, ctx)) {
-    return;
-  }
+  // if (!helper.validateObjectKeys(keys, hint, ctx)) {
+  //   return;
+  // }
 
   try {
     // check if user exists
-    await database.getUserByID(hint.user_id);
+    // await database.getUserByID(hint.user_id);
 
     await database.addNewHint(hint);
 

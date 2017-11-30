@@ -65,16 +65,15 @@ class AddHint extends Component {
   }
 
   async handleSubmit() {
-    console.log('aubmitting');
+    console.log('Submitting');
     delete this.state.size;
     delete this.state.open;
 
     console.log(this.state);
     console.log(this.props);
 
-    const { title, id, subtitle } = this.props;
     let res = axios.post(`http://${config.WEBSERVER}:8000/hint/create`, { ...this.state
-    });
+    }).then().catch(err => console.log(err));
 
     console.log('added hint');
   }
@@ -105,8 +104,8 @@ class AddHint extends Component {
                 <label>Full Name</label>
                 <input
                   placeholder="Name"
-                  name="fullName"
-                  value={this.state.fullName}
+                  name="user_full_name"
+                  value={this.state.user_full_name}
                   onChange={this.handleInputChange}
                 />
               </Form.Field>
@@ -122,7 +121,7 @@ class AddHint extends Component {
               <Form.Field>
                 <label>Position</label>
                 <input
-                  name="Position"
+                  name="position"
                   value={this.state.position}
                   placeholder="Position"
                   onChange={this.handleInputChange}
@@ -131,8 +130,8 @@ class AddHint extends Component {
               <Form.Field>
                 <label>Department</label>
                 <input
-                  name="Department"
-                  value={this.state.department}
+                  name="user_department"
+                  value={this.state.user_department}
                   placeholder="Department"
                   onChange={this.handleInputChange}
                 />
@@ -149,8 +148,8 @@ class AddHint extends Component {
               <Form.Field>
                 <label>Hint Description</label>
                 <TextArea
-                  name="Hint Description"
-                  value={this.state.hintDescription}
+                  name="description"
+                  value={this.state.description}
                   placeholder="Hint Description"
                   onChange={this.handleInputChange}
                 />

@@ -1,11 +1,6 @@
 import request from 'request';
 import config from '../../config/config';
 
-
-const myArray = [{title: 'Arie Belenky', subtitle: 'Software Developer'},
-    {title: 'Zigi Bigule', subtitle: 'Software Engineer'}];
-
-
 const promisifiedRequest = (url, method, obj)=>{
     return new Promise((resolve, reject)=>{
         let options = {
