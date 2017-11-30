@@ -149,6 +149,7 @@ async function getFeedItems(ctx) {
 
         let activities = await database.getFeedItems();
 
+        activities = activities.Items;
         activities.sort(function(first, second) {
             return second.created_ts - first.created_ts;
         });
