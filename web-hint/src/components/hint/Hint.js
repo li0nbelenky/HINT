@@ -29,7 +29,7 @@ class Hint extends Component {
     } else if (this.props.action === 'Resolved') {
       return <ResolvedActivity key={this.props.id} {...this.props} />;
     } else {
-      return <div>Unknown type of Activity</div>;
+      return <div></div>;
     }
   }
 }
