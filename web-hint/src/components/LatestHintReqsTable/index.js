@@ -5,9 +5,9 @@ class LatestHintReqsTable extends Component {
     render() {
         return (
             <div className="LatestHintReqsTable">
-                <h1>Latest Hints pending for help</h1>
+                <h1>Latest Trending Hints</h1>
                 <Card>
-                    <Card>
+                    <Card fluid>
                         <Card.Content>
                             <Card.Header>
                                 Daniel Zinger
@@ -26,7 +26,7 @@ class LatestHintReqsTable extends Component {
                             </div>
                         </Card.Content>
                     </Card>
-                    <Card>
+                    <Card fluid>
                         <Card.Content>
                             <Card.Header>
                                 Shany Shmuely
@@ -45,7 +45,7 @@ class LatestHintReqsTable extends Component {
                             </div>
                         </Card.Content>
                     </Card>
-                    <Card>
+                    <Card fluid>
                         <Card.Content>
                             <Card.Header>
                                 Lior Haiman

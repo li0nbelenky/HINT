@@ -16,7 +16,7 @@ class App extends Component {
       <Grid.Column width={6}>
           <Feed />
         </Grid.Column>
-        <Grid.Column width={6}>
+        <Grid.Column width={3}>
           <Segment>
             <TopTables />
           </Segment>

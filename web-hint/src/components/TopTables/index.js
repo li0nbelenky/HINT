@@ -21,7 +21,7 @@ class TopTables extends Component {
                                     <Image src='/assets/images/avatar/small/lena.png' rounded size='mini' />
                                     <Header.Content>
                                         Lior Haiman
-                                        <Header.Subheader>Infra - Project Manager </Header.Subheader>
+                                        <Header.Subheader>Project Manager </Header.Subheader>
                                     </Header.Content>
                                 </Header>
                             </Table.Cell>
