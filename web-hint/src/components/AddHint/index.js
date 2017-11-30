@@ -37,7 +37,8 @@ class AddHint extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tags: []
+      tags: [],
+      followers: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
