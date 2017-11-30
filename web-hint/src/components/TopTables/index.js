@@ -5,12 +5,12 @@ class TopTables extends Component {
     render() {
         return (
             <div className="TopTables">
-                <h1>Top Table</h1>
+                <h1>Top HINT resolvers</h1>
                 <Table basic='very' celled collapsing>
                     <Table.Header>
                         <Table.Row>
                             <Table.HeaderCell>Employee</Table.HeaderCell>
-                            <Table.HeaderCell>Correct Guesses</Table.HeaderCell>
+                            <Table.HeaderCell>Resolution Points</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
 
@@ -20,13 +20,13 @@ class TopTables extends Component {
                                 <Header as='h4' image>
                                     <Image src='/assets/images/avatar/small/lena.png' rounded size='mini' />
                                     <Header.Content>
-                                        Lena
-                                        <Header.Subheader>Human Resources</Header.Subheader>
+                                        Lior Haiman
+                                        <Header.Subheader>Infra - Project Manager </Header.Subheader>
                                     </Header.Content>
                                 </Header>
                             </Table.Cell>
                             <Table.Cell>
-                                22
+                                122
                             </Table.Cell>
                         </Table.Row>
                         <Table.Row>
@@ -34,13 +34,13 @@ class TopTables extends Component {
                                 <Header as='h4' image>
                                     <Image src='/assets/images/avatar/small/matthew.png' rounded size='mini' />
                                     <Header.Content>
-                                        Matthew
-                                        <Header.Subheader>Fabric Design</Header.Subheader>
+                                        Daniel Zinger
+                                        <Header.Subheader>AppQuarium Guru</Header.Subheader>
                                     </Header.Content>
                                 </Header>
                             </Table.Cell>
                             <Table.Cell>
-                                15
+                                115
                             </Table.Cell>
                         </Table.Row>
                         <Table.Row>
@@ -48,13 +48,13 @@ class TopTables extends Component {
                                 <Header as='h4' image>
                                     <Image src='/assets/images/avatar/small/lindsay.png' rounded size='mini' />
                                     <Header.Content>
-                                        Lindsay
-                                        <Header.Subheader>Entertainment</Header.Subheader>
+                                        Shany Shmuely
+                                        <Header.Subheader>Atom - RND Manager</Header.Subheader>
                                     </Header.Content>
                                 </Header>
                             </Table.Cell>
                             <Table.Cell>
-                                12
+                                112
                             </Table.Cell>
                         </Table.Row>
                         <Table.Row>

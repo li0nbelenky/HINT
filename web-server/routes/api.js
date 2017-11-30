@@ -5,6 +5,8 @@ const Router = require('koa-router'),
   config = require('../config/config'),
   database = require('../database'),
   helper = require('../helper'),
+  Promise = require('bluebird'),
+  _ = require('lodash'),
   functions = require('../functions');
 
 // let redisClient = redis.createClient({
@@ -12,136 +14,23 @@ const Router = require('koa-router'),
 //     port: config.redis.port
 // });
 
-const mockDB = [
-  {
-    payload: [
-      {
-        action: 'New hint',
-        hint_id: uuidv4(),
-        user_id: uuidv4(),
-        user_full_name: 'Arie Belenky',
-        user_department: 'installCore',
-        title: 'Please help me create KOA web server with generator functions',
-        description:
-          'I try to yield from generator function and receive a reference to a Promise instead of the return value',
-        status: 'open',
-        tags: ['Node JS', 'KOA', 'Generators', 'ES6'],
-        views: 0,
-        followers: [],
-        solution: null,
-        created_ts: new Date().toJSON(),
-        updated_ts: new Date().toJSON(),
-        helper: null,
-        helper_full_name: null,
-        helper_department: null
-      },
-      {
-        action: 'Frog match',
-        hint_id: uuidv4(),
-        user_id: uuidv4(),
-        user_full_name: 'Gil Cohen',
-        user_department: 'installCore',
-        title: 'Please help me create KOA web server with generator functions',
-        description:
-          'I try to yield from generator function and receive a reference to a Promise instead of the return value',
-        status: 'open',
-        tags: ['Node JS', 'KOA', 'Generators', 'ES6'],
-        views: 0,
-        followers: [uuidv4(), uuidv4(), uuidv4()],
-        solution: null,
-        created_ts: new Date().toJSON(),
-        updated_ts: new Date().toJSON(),
-        helper: uuidv4(),
-        helper_full_name: 'Arie Belenky',
-        helper_department: 'Infra'
-      },
-      {
-        action: 'Resolved',
-        hint_id: uuidv4(),
-        user_id: uuidv4(),
-        user_full_name: 'Daniel Ledevich',
-        user_department: 'installCore',
-        title: 'Please help me create KOA web server with generator functions',
-        description:
-          'I try to yield from generator function and receive a reference to a Promise instead of the return value',
-        status: 'open',
-        tags: ['Node JS', 'KOA', 'Generators', 'ES6'],
-        views: 0,
-        followers: [uuidv4(), uuidv4(), uuidv4()],
-        solution: 'RTFM',
-        created_ts: new Date().toJSON(),
-        updated_ts: new Date().toJSON(),
-        helper: uuidv4(),
-        helper_full_name: 'Arie Belenky',
-        helper_department: 'Infra'
-      }
-    ]
-  },
-  {
-    payload: [
-      {
-        action: 'New hint',
-        hint_id: uuidv4(),
-        user_id: uuidv4(),
-        user_full_name: 'Shany Shmuely',
-        user_department: 'installCore',
-        title: 'Please help me create KOA web server with generator functions',
-        description:
-          'I try to yield from generator function and receive a reference to a Promise instead of the return value',
-        status: 'open',
-        tags: ['Node JS', 'KOA', 'Generators', 'ES6'],
-        views: 0,
-        followers: [],
-        solution: null,
-        created_ts: new Date().toJSON(),
-        updated_ts: new Date().toJSON(),
-        helper: null,
-        helper_full_name: null,
-        helper_department: null
-      },
-      {
-        action: 'Frog match',
-        hint_id: uuidv4(),
-        user_id: uuidv4(),
-        user_full_name: 'Lior Haiman',
-        user_department: 'installCore',
-        title: 'Please help me create KOA web server with generator functions',
-        description:
-          'I try to yield from generator function and receive a reference to a Promise instead of the return value',
-        status: 'open',
-        tags: ['Node JS', 'KOA', 'Generators', 'ES6'],
-        views: 0,
-        followers: [uuidv4(), uuidv4(), uuidv4()],
-        solution: null,
-        created_ts: new Date().toJSON(),
-        updated_ts: new Date().toJSON(),
-        helper: uuidv4(),
-        helper_full_name: 'Gil Cohen',
-        helper_department: 'Infra'
-      },
-      {
-        action: 'Resolved',
-        hint_id: uuidv4(),
-        user_id: uuidv4(),
-        user_full_name: 'Dmytro Kostylov',
-        user_department: 'installCore',
-        title: 'Please help me create KOA web server with generator functions',
-        description:
-          'I try to yield from generator function and receive a reference to a Promise instead of the return value',
-        status: 'open',
-        tags: ['Node JS', 'KOA', 'Generators', 'ES6'],
-        views: 0,
-        followers: [uuidv4(), uuidv4(), uuidv4()],
-        solution: 'RTFM',
-        created_ts: new Date().toJSON(),
-        updated_ts: new Date().toJSON(),
-        helper: uuidv4(),
-        helper_full_name: 'Valentine Pavchuk',
-        helper_department: 'Infra'
-      }
-    ]
+
+function addData(activity, hint) {
+  let hint_keys = _.keys(hint);
+  for (let key of hint_keys) {
+    activity[key] = hint[key];
   }
-];
+
+}
+
+function AddHintData(hints, activity) {
+  for (let hint of hints) {
+    if (activity.hint_id == hint.uid) {
+        addData(activity, hint)
+        break;
+    }
+  }
+}
 
 async function getFeedItems(ctx) {
 
@@ -151,7 +40,15 @@ async function getFeedItems(ctx) {
 
         activities = activities.Items;
         activities.sort(function(first, second) {
-            return second.created_ts - first.created_ts;
+            return second.ts - first.ts;
+        });
+
+        let activityPromises = _.map(activities, (activity) => database.getHintByID(activity.hint_id));
+
+        let hints = await Promise.all(activityPromises);
+
+        activities.forEach(function(activity){
+            AddHintData(hints, activity)
         });
 
         ctx.body = {
