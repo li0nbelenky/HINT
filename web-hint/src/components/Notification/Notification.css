@@ -52,6 +52,7 @@
 
 .list .item .content{
     max-width: 300px;
+    min-width: 280px;
     display: inline-block;
     vertical-align: middle;
 }
@@ -63,4 +64,13 @@
 .list .item .confirm-help{
     padding: 4px 6px;
     margin-top: 10px !important;
+}
+
+.list .item .confirm-label{
+    float: right;
+    margin-top: 10px;
+}
+
+.confirm-label .confirm-label-text{
+    background-color: transparent;
 }
