@@ -21,7 +21,7 @@ class Feed extends Component {
           ? null
           : this.setState({ hints: feedItems.activities });
       });
-    }, 1000);
+    }, 10000);
   }
 
   render() {

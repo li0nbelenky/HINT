@@ -37,25 +37,25 @@ const mockData = {
       data: [160, 150, 100, 50, 56, 55, 40]
     },
     {
-        label: 'docker',
-        fill: false,
-        lineTension: 0.1,
-        backgroundColor: 'rgba(226,64,64,0.4)',
-        borderColor: 'rgba(226,64,64,1)',
-        borderCapStyle: 'butt',
-        borderDash: [],
-        borderDashOffset: 0.0,
-        borderJoinStyle: 'miter',
-        pointBorderColor: 'rgba(226,64,64,1)',
-        pointBackgroundColor: '#fff',
-        pointBorderWidth: 1,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: 'rgba(226,64,64,1)',
-        pointHoverBorderColor: 'rgba(220,220,220,1)',
-        pointHoverBorderWidth: 2,
-        pointRadius: 1,
-        pointHitRadius: 10,
-        data: [55, 70, 80, 90, 100, 105, 110]
+      label: 'docker',
+      fill: false,
+      lineTension: 0.1,
+      backgroundColor: 'rgba(226,64,64,0.4)',
+      borderColor: 'rgba(226,64,64,1)',
+      borderCapStyle: 'butt',
+      borderDash: [],
+      borderDashOffset: 0.0,
+      borderJoinStyle: 'miter',
+      pointBorderColor: 'rgba(226,64,64,1)',
+      pointBackgroundColor: '#fff',
+      pointBorderWidth: 1,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: 'rgba(226,64,64,1)',
+      pointHoverBorderColor: 'rgba(220,220,220,1)',
+      pointHoverBorderWidth: 2,
+      pointRadius: 1,
+      pointHitRadius: 10,
+      data: [55, 70, 80, 90, 100, 105, 110]
     },
     {
       label: 'react',
@@ -124,7 +124,7 @@ class TagTrends extends Component {
             })
           : null;
       });
-    }, 1000);
+    }, 10000);
   }
   render() {
     return (
