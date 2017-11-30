@@ -144,8 +144,26 @@ const mockDB = [
 ];
 
 async function getFeedItems(ctx) {
-  ctx.body = mockDB[Math.floor(Math.random() * 2)];
-  ctx.status = 200;
+
+    try {
+
+        let activities = await database.getFeedItems();
+
+        activities.sort(function(first, second) {
+            return second.created_ts - first.created_ts;
+        });
+
+        ctx.body = {
+            status: true,
+            activities: activities
+        };
+        ctx.status = 200;
+    } catch (ex) {
+        console.error(ex);
+
+        ctx.body = ex;
+        ctx.status = 400;
+    }
 }
 
 async function addFollowerToHint(ctx) {
@@ -194,6 +212,8 @@ async function createNewHint(ctx) {
     await database.getUserByID(hint.user_id);
 
     await database.addNewHint(hint);
+
+    await database.addNewActivity('New hint created', hint.uid);
 
     ctx.body = {
       status: true,

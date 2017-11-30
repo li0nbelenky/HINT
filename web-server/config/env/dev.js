@@ -8,6 +8,7 @@ module.exports = {
         region: 'eu-central-1',
         hints_table: 'hints',
         users_table: 'users',
+        activities_table: 'activitys',
         notifications_table: 'notifications',
         departments_table: "departments"
     },
