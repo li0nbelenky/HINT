@@ -37,6 +37,7 @@ async function getFeedItems(ctx) {
     try {
 
         let activities = await database.getFeedItems();
+        console.log(activities)
 
         activities = activities.Items;
         activities.sort(function(first, second) {
