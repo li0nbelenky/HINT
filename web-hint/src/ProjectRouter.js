@@ -23,6 +23,9 @@ const ProjectRouter = () => (
       <Menu>
         <Menu.Item header> 💡 HELP is what I NEED, THANKS</Menu.Item>
         <Menu.Item as={Link} to='/'>
+          <AddHint />
+        </Menu.Item>
+        <Menu.Item as={Link} to='/'>
           Home
         </Menu.Item>
         <Menu.Item as={Link} to='/trends'>
