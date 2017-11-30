@@ -1,3 +1,7 @@
+.notification-wrapper{
+    margin-left: 10px;
+}
+
 .notification-trigger button.ui.circular.icon{
     font-size: 2em;
     padding: 0;
@@ -8,8 +12,8 @@
     min-height: 20px;
     padding: 5px;
     font-size: 10px;
-    top: 3em;
-    left: 2em;
+    top: 2.5em;
+    left: 3em;
 }
 .notification-trigger .ui.floating.label:hover{
     background-color: transparent;
