@@ -8,7 +8,6 @@ import {Icon, Button, Popup, Label, List, Image, Checkbox} from "semantic-ui-rea
 class Notification extends Component {
   constructor(props) {
     super( props );
-    console.log( props );
     this.state = {
       items: [],
       iconType: "alarm outline"
@@ -23,9 +22,9 @@ class Notification extends Component {
             items: _.sortBy("type")( notifications ),
             iconType: notifications.length > 0 ? "alarm" : "alarm outline"
           });
-          console.log( notifications );
+          // console.log( notifications );
         });
-      }, 1000 );
+      }, 4000 );
   }
 
 
