@@ -200,6 +200,29 @@ async function departments_impact(ctx) {
   });
 }
 
+
+async function suggestHelp(ctx) {
+    console.log(ctx.params);
+
+    let userId = ctx.params.userId;
+    let hintId = ctx.params.hintId;
+
+    let notification = {};
+    notification.user_id = userId;
+    notification.hint_id = hintId;
+    notification.type = 'suggest_help';
+
+    await database.addNewNotification(notification);
+
+    ctx.body = {
+        status: true,
+        uid: notification.uid
+    };
+    ctx.status = 200;
+
+}
+
+
 async function getNotificationsByUserID(ctx) {
   console.log(ctx.params);
 
@@ -255,5 +278,8 @@ router.post('/follow', addFollowerToHint);
 
 router.get('/departments_impact', departments_impact);
 router.post('/getHintsByTagDepStatus', getHintsByTagDepStatus);
+router.post('/suggest_help/:hintId/:userId', suggestHelp);
+
+
 
 module.exports = router;
