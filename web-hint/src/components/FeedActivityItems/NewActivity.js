@@ -35,7 +35,7 @@ class NewActivity extends Component {
           </SemFeed.Label>
           <SemFeed.Content>
             <SemFeed.Summary>
-              <SemFeed.User>{this.props.user_full_name}</SemFeed.User> Created a
+              <SemFeed.User>{this.props.user_id}</SemFeed.User> Created a
               new HINT
               <SemFeed.Date>{this.props.created_ts}</SemFeed.Date>
             </SemFeed.Summary>
