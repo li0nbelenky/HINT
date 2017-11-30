@@ -38,7 +38,8 @@ class Notification extends Component {
       </span>
     );
 
-    function ConfirmBtn() {
+
+    function ConfirmBtn(props) {
       return <Button basic color="green"
               className={"confirm-help"}
               floated="right"
@@ -46,7 +47,7 @@ class Notification extends Component {
       </Button>
     };
 
-    function ResolveData() {
+    function ResolveData(props) {
       return <Label floating>{Math.floor(Math.random() * 60)} min ago</Label>
     };
 
