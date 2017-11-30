@@ -44,10 +44,10 @@ class Notification extends Component {
             <Image avatar src={DefAvatar} />
             <Label color="orange" basic circular floating>{this.state.items.length}</Label>
             <List.Content>
-              <List.Header as="a">User Name</List.Header>
-              <List.Description>{item.hint_id}.</List.Description>
+              <List.Header as="a">{item.user_id}</List.Header>
+              <List.Description>{item.description}</List.Description>
             </List.Content>
-            <Checkbox/>
+            <Checkbox className="right floated" />
           </List.Item>
           )
         )}
