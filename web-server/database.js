@@ -105,19 +105,18 @@ module.exports = {
     });
   },
 
-  addNewActivity: function(action, hint_id) {
-    return new Promise(function(resolve, reject) {
-      let activity = {};
-      activity.action = activity;
-      activity.hint_id = hint_id;
-      activity.uid = uuidv4();
-      let currentTime = Date.now().toString();
-      activity.created_ts = currentTime;
-
-      let params = {
-        TableName: config.aws.activities_table,
-        Item: activity
-      };
+    addNewActivity: function (action, hint_id) {
+        return new Promise(function (resolve, reject) {
+            console.log(action, hint_id);
+            let activity = {};
+            activity.action = action;
+            activity.hint_id = hint_id;
+            activity.ts = Date.now().toString();
+            
+            let params = {
+                TableName: config.aws.activities_table,
+                Item: activity
+            };
 
       docClient.put(params, function(err, res) {
         if (err) {
