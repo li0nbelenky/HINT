@@ -163,7 +163,7 @@ async function createNewUser(ctx) {
 async function createNewNotification(ctx) {
   let notification = ctx.request.body;
 
-  let keys = ['user_id', 'hint_id', 'type'];
+  let keys = ['user_id', 'hint_id', 'type', 'helper_full_name', 'helper_user_id'];
   if (!helper.validateObjectKeys(keys, notification, ctx)) {
     return;
   }
@@ -171,6 +171,7 @@ async function createNewNotification(ctx) {
   try {
     // check if user exists
     await database.getUserByID(notification.user_id);
+    await database.getUserByID(notification.helper_user_id);
 
     // check if hint exist
     await database.getHintByID(notification.hint_id);
@@ -234,6 +235,15 @@ async function getNotificationsByUserID(ctx) {
     await database.getUserByID(userID);
 
     let notifications = await database.getNotificationsByUserID(userID);
+
+    for (var key in notifications) {
+        let notification = notifications[key];
+
+        let notificationUser = await database.getUserByID(notification.helper_user_id);
+
+        notification.position = notificationUser.position;
+        notification.department = notificationUser.department;
+    }
 
     ctx.body = {
       status: true,
